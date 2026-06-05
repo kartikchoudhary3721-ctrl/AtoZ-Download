@@ -529,60 +529,45 @@ def download():
                 return render_template('index.html', error=f"Twitter API Failed: {tw_err}", active_tab=current_tab)
 
       # 🔥 ENGINE 7: THREADS (NEW UNLIMITED API) 🔥
+     # 🔥 ENGINE 7: THREADS (UNLIMITED POWER - yt-dlp) 🔥
         if 'threads.net' in url or 'threads.com' in url:
-            api_url = "https://threads-video-image-downloader11.p.rapidapi.com/threads.php"
-
-            payload = {"url": url}
-            headers = {
-                "X-RapidAPI-Key": "34ed1f8149msh8968a77b1783e63p17b3aejsn78ff14f8b053",
-                "X-RapidAPI-Host": "threads-video-image-downloader11.p.rapidapi.com",
-                "Content-Type": "application/x-www-form-urlencoded"
-            }
-
             try:
-                response = requests.post(api_url, data=payload, headers=headers, timeout=15)
-                data = response.json()
+                import yt_dlp
+                
+                # yt-dlp ko chupchap chalane ki settings
+                ydl_opts = {
+                    'quiet': True,
+                    'no_warnings': True,
+                }
+                
+                with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                    # Bina download kiye direct Threads server se link nikalna
+                    info = ydl.extract_info(url, download=False)
+                    
+                    dl_link = info.get('url')
+                    video_title = info.get('description') or info.get('title') or "Threads Media"
+                    thumb = info.get('thumbnail') or ""
+                    media_type = "Video"
+                    
+                    # Agar link image ka hai
+                    if info.get('ext') in ['jpg', 'png', 'webp'] or info.get('vcodec') == 'none':
+                        media_type = "Photo"
+                        if not dl_link: # Agar direct link nahi mila toh thumbnail ko hi image maan lenge
+                            dl_link = thumb
 
-                dl_link = None
-                video_title = "Threads Media"
-                thumb = ""
-                media_type = "Video"
-
-                if data and isinstance(data, dict):
-                    # 🛑 Agar ye API bhi limit ka rona roye
-                    if 'message' in data and 'exceeded' in data.get('message', '').lower():
-                        return render_template('index.html', error="Bhai is nayi API ne bhi dhokha de diya (Limit Over). Nayi API dhoondhni padegi!", active_tab=current_tab)
-
-                    # 🌟 Smart Data Extraction
-                    if 'medias' in data and isinstance(data['medias'], list) and len(data['medias']) > 0:
-                        dl_link = data['medias'][0].get('download_url') or data['medias'][0].get('url')
-
-                    # Backup checks
-                    if not dl_link:
-                        dl_link = data.get('video_url') or data.get('video') or data.get('image_url') or data.get('url')
-
-                    video_title = data.get('title') or "Threads Video"
-                    thumb = data.get('thumbnail') or ""
-
-                if dl_link:
-                    # Agar link .jpg ya image ka hai toh Photo set karo
-                    if '.jpg' in dl_link.lower() or '.png' in dl_link.lower() and '.mp4' not in dl_link.lower():
-                        media_type = 'Photo'
-
-                    media_list.append({
-                        'type': media_type,
-                        'url': dl_link,
-                        'thumb': thumb if thumb else dl_link,
-                        'title': video_title[:30]
-                    })
-                    return render_template('index.html', media_list=media_list, caption=video_title, active_tab=current_tab)
-                else:
-                    # 🔥 SMART DEBUG (Laal Dabba)
-                    safe_data = str(data)[:500]
-                    return render_template('index.html', error=f"Media nahi mila! API ka naya nakhra: {safe_data}", active_tab=current_tab)
+                    if dl_link:
+                        media_list.append({
+                            'type': media_type,
+                            'url': dl_link,
+                            'thumb': thumb if thumb else dl_link,
+                            'title': video_title[:30]
+                        })
+                        return render_template('index.html', media_list=media_list, caption=video_title, active_tab=current_tab)
+                    else:
+                        return render_template('index.html', error="Bhai, is Threads link mein media nahi mila.", active_tab=current_tab)
 
             except Exception as th_err:
-                return render_template('index.html', error=f"Threads API Failed: {th_err}", active_tab=current_tab)
+                return render_template('index.html', error=f"Threads Direct Engine Failed: {str(th_err)}", active_tab=current_tab)
         # 🔥 ENGINE 2: INSTAGRAM
 
         # 🔥 ENGINE 2: INSTAGRAM
