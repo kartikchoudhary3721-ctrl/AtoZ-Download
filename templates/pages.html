@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} - AToZ Download</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+        :root { --bg-color: #f3f4f6; --card-bg: #ffffff; --text-main: #111827; --primary: #007AFF; --border-color: #e5e7eb; --text-muted: #6b7280; }
+        [data-theme="dark"] { --bg-color: #0f172a; --card-bg: #1e293b; --text-main: #f8fafc; --primary: #3b82f6; --border-color: #334155; --text-muted: #94a3b8;}
+        body { background-color: var(--bg-color); font-family: 'Inter', sans-serif; margin: 0; padding: 100px 15px 20px 15px; color: var(--text-main); display: flex; justify-content: center;}
+
+        .top-bar { position: fixed; top: 0; left: 0; width: 100%; height: 60px; background: var(--card-bg); padding: 0 15px; border-bottom: 1px solid var(--border-color); z-index: 1000; display: flex; justify-content: center; align-items: center; box-sizing: border-box; }
+        .brand-name { font-size: 20px; font-weight: 800; text-decoration: none; color: var(--primary); }
+
+        .content-box { background: var(--card-bg); padding: 40px; border-radius: 20px; max-width: 800px; width: 100%; border: 1px solid var(--border-color); line-height: 1.8; box-shadow: 0 10px 40px rgba(0,0,0,0.05); }
+        h1 { color: var(--text-main); margin-top: 0; font-size: 32px; border-bottom: 2px solid var(--border-color); padding-bottom: 10px;}
+        h2 { font-size: 22px; margin-top: 30px; color: var(--primary);}
+        p, li { font-size: 16px; color: var(--text-muted); margin-bottom: 15px; }
+        strong { color: var(--text-main); }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <a href="/" class="brand-name">⬅ Back to Tool</a>
+    </div>
+
+    <div class="content-box">
+        {% if page == 'about' %}
+            <h1>About Us</h1>
+            <p>Welcome to <strong>AToZ Download</strong>, your ultimate digital utility tool. We are dedicated to providing you the very best of social media downloading services, with an emphasis on speed, security, and high-definition quality without watermarks.</p>
+            <p>Developed and maintained by <strong>Kartik Choudhary</strong> under the umbrella of <strong>Digital Rise Media</strong> (Jaipur), AToZ Download has come a long way from its beginnings. Our passion for creating accessible and free digital tools drove us to build this platform for creators and users alike.</p>
+            <p>We hope you enjoy our products as much as we enjoy offering them to you. If you have any questions or comments, please don't hesitate to contact us.</p>
+
+        {% elif page == 'privacy' %}
+            <h1>Privacy Policy</h1>
+            <p>At AToZ Download, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by us and how we use it.</p>
+            <h2>Log Files</h2>
+            <p>AToZ Download follows a standard procedure of using log files. These files log visitors when they visit websites. The information collected by log files include internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and possibly the number of clicks.</p>
+            <h2>Cookies and Web Beacons</h2>
+            <p>Like any other website, we use "cookies". These cookies are used to store information including visitors' preferences, and the pages on the website that the visitor accessed or visited. This helps us optimize the user experience.</p>
+            <h2>Google DoubleClick DART Cookie</h2>
+            <p>Google is one of a third-party vendor on our site. It also uses cookies, known as DART cookies, to serve ads to our site visitors based upon their visit to our site and other sites on the internet. Visitors may choose to decline the use of DART cookies by visiting the Google ad and content network Privacy Policy.</p>
+            <h2>Consent</h2>
+            <p>By using our website, you hereby consent to our Privacy Policy and agree to its Terms and Conditions. We do not store or save any of the media files you download on our servers.</p>
+
+        {% elif page == 'contact' %}
+            <h1>Contact Us</h1>
+            <p>If you have any questions, suggestions, or business/advertising inquiries, feel free to reach out to us. We aim to respond to all queries within 24-48 hours.</p>
+            <p><strong>Business Name:</strong> AtoZ Download</p>
+            <p><strong>Developer:</strong> Kartik Choudhary</p>
+            <p><strong>Location:</strong> Jaipur, Rajasthan, India</p>
+            <p><strong>Email:</strong> kartikchoudhary3721@gmail.com</p>
+            <p>We are always open to discussing new projects, creative ideas, or opportunities to be part of your vision. Let's connect!</p>
+        {% endif %}
+    </div>
+
+    <script>
+        // Auto-apply Dark mode if user selected it on main page
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+</body>
+</html>

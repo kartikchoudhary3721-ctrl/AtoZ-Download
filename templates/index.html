@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="hi" data-theme="light">
+<head>
+<meta name="monetag" content="32ff17ac9c46c043d641ff87c1d610b9">
+    <link rel="canonical" href="https://atozdownloaderbykartik.pythonanywhere.com{{ request.path }}" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "{% if seo_title %}{{ seo_title }}{% else %}AToZ Download{% endif %}",
+      "description": "Download Instagram Reels, Video, Photo, and DP in Full HD quality.",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "All",
+      "url": "https://atozdownloaderbykartik.pythonanywhere.com{{ request.path }}",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="referrer" content="no-referrer">
+    <link rel="manifest" href="/manifest.json">
+
+    <title>{% if seo_title %}{{ seo_title }}{% else %}AToZ Download - InstaSave - Kartik{% endif %}</title>
+    <meta name="description" content="{% if seo_desc %}{{ seo_desc }}{% else %}Download Instagram Reels, Stories, Highlights, DP, and Facebook Reels for free without watermark. Fast and secure AToZ InstaSave tool by Kartik.{% endif %}">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2WBRB5FG56"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-2WBRB5FG56');
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <meta name="google-site-verification" content="googlebdeb0be3bcb66a2e.html" />
+
+    <meta name="keywords" content="Instagram reel downloader, Insta DP viewer, download FB reels, InstaSave, AToZ download, IG downloader without watermark, story saver">
+    <meta name="author" content="Kartik Choudhary">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:title" content="{% if seo_title %}{{ seo_title }}{% else %}AToZ Download - Pro Insta & FB Downloader{% endif %}">
+    <meta property="og:description" content="{% if seo_desc %}{{ seo_desc }}{% else %}Insta Reels, DP, Stories aur FB videos download karein bina watermark ke. Try it now!{% endif %}">
+    <meta property="og:image" content="https://atozdownloaderbykartik.pythonanywhere.com/logo.png?v=2">
+    <meta property="og:image:secure_url" content="https://atozdownloaderbykartik.pythonanywhere.com/logo.png?v=2">
+    <meta property="og:image:type" content="image/png">
+
+    <link rel="apple-touch-icon" href="/logo.png">
+    <link rel="icon" type="image/png" href="/logo.png">
+
+   <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+
+        :root {
+            --bg-color: #f3f4f6; --card-bg: #ffffff; --text-main: #111827;
+            --text-muted: #6b7280; --primary: #007AFF; --border-color: #e5e7eb;
+            --input-bg: #f9fafb; --badge-bg: #fef08a; --badge-text: #854d0e;
+        }
+        [data-theme="dark"] {
+            --bg-color: #0f172a; --card-bg: #1e293b; --text-main: #f8fafc;
+            --text-muted: #94a3b8; --primary: #3b82f6; --border-color: #334155;
+            --input-bg: #0f172a; --badge-bg: #713f12; --badge-text: #fef08a;
+        }
+
+        /* 🔥 FIX 1: Body padding increased to push everything safely down 🔥 */
+        body { background-color: var(--bg-color); font-family: 'Inter', sans-serif; margin: 0; padding: 130px 15px 20px 15px; display: flex; flex-direction: column; align-items: center; color: var(--text-main); transition: 0.3s; }
+
+        /* 🔥 FIX 2: Fixed height for top bar so it never expands and hides the ticker 🔥 */
+        .top-bar { position: fixed; top: 0; left: 0; width: 100%; height: 60px; background: var(--card-bg); padding: 0 15px; border-bottom: 1px solid var(--border-color); z-index: 1000; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; }
+
+        .top-left { flex: 1; display: flex; justify-content: flex-start; }
+        .top-center { flex: 1.5; text-align: center; white-space: nowrap; }
+        .top-right { flex: 1; display: flex; justify-content: flex-end; gap: 10px; align-items: center; }
+
+        .brand-name { font-size: 14px; font-weight: 800; }
+        .icon-btn { background: none; border: none; font-size: 18px; cursor: pointer; color: var(--text-main); padding: 0;}
+        .lang-btn { font-size: 16px; font-weight: 800; }
+
+        /* 🔥 FIX 3: Fixed height and explicitly placed exactly below top-bar 🔥 */
+        .live-ticker {
+            position: fixed; top: 60px; left: 0; width: 100%; height: 32px; background: var(--primary);
+            color: white; font-size: 12px; font-weight: 700;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 999; box-shadow: 0 4px 10px rgba(0,0,0,0.1); box-sizing: border-box;
+        }
+
+        .container { background: var(--card-bg); padding: 35px 25px; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); text-align: center; width: 100%; max-width: 450px; border: 1px solid var(--border-color); box-sizing: border-box; position: relative; }
+        h1 { margin-bottom: 5px; font-size: 26px; }
+        .highlight { color: var(--primary); }
+        .subtitle { color: var(--text-muted); font-size: 12px; margin-bottom: 15px;}
+
+        .stats-badge {
+            display: inline-block; background: var(--badge-bg); color: var(--badge-text);
+            padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 800;
+            margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            opacity: 0; transition: opacity 0.5s ease;
+        }
+
+        .input-wrapper { position: relative; width: 100%; margin-bottom: 15px;}
+        input {
+            width: 100%; padding: 15px 85px 15px 15px; border: 2px solid var(--border-color);
+            border-radius: 14px; outline: none; background: var(--input-bg);
+            color: var(--text-main); box-sizing: border-box; font-size: 14px;
+            transition: 0.3s;
+        }
+        input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.1); }
+
+        .action-btns { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); display: flex; gap: 5px; }
+        .action-btn { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 6px 10px; cursor: pointer; font-size: 11px; font-weight: 800; color: var(--text-main); transition: 0.2s; }
+        .action-btn:hover { background: var(--border-color); }
+        #clearBtn { color: #ef4444; display: none; }
+
+        .chips-wrapper { display: flex; gap: 8px; justify-content: center; margin-bottom: 15px; flex-wrap: wrap;}
+        .chip {
+            background: var(--input-bg); border: 1px solid var(--border-color); padding: 6px 12px;
+            border-radius: 20px; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s; color: var(--text-muted);
+        }
+        .chip.active { background: var(--primary); color: white; border-color: var(--primary); font-weight: 800;}
+
+        button.fetch-btn {
+            width: 100%; padding: 15px; background: var(--primary); color: #ffffff; border: none;
+            border-radius: 14px; font-weight: 800; font-size: 15px; cursor: pointer; transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 122, 255, 0.3);
+        }
+        button.fetch-btn:hover { opacity: 0.8; transform: translateY(-2px); }
+
+        .switch { position: relative; display: inline-block; width: 36px; height: 20px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 20px;}
+        .slider:before { position: absolute; content: ""; height: 14px; width: 14px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%;}
+        input:checked + .slider { background-color: #111827; }
+        [data-theme="dark"] input:checked + .slider { background-color: #3b82f6; }
+        input:checked + .slider:before { transform: translateX(16px); }
+
+        .progress-wrapper { width: 100%; background: var(--border-color); border-radius: 10px; overflow: hidden; height: 10px; margin-top: 15px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);}
+        .progress-bar { width: 0%; height: 100%; background: var(--primary); transition: width 0.3s ease; border-radius: 10px;}
+        .progress-text { font-size: 14px; font-weight: 800; color: var(--primary); margin-top: 8px; }
+
+        .skeleton-wrapper { display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; align-items: center; }
+        .skeleton-box { width: 100%; height: 150px; border-radius: 14px; background: #e5e7eb; animation: shimmer 1.5s infinite linear; }
+        .skeleton-text-line { width: 60%; height: 12px; border-radius: 6px; background: #e5e7eb; animation: shimmer 1.5s infinite linear; }
+        [data-theme="dark"] .skeleton-box, [data-theme="dark"] .skeleton-text-line { background: #334155; }
+        @keyframes shimmer { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
+
+        .promo-banner { background: linear-gradient(135deg, #111827, #3b82f6); color: #ffffff; padding: 16px; border-radius: 16px; margin-top: 30px; width: 100%; max-width: 450px; text-align: center; text-decoration: none; display: block; box-sizing: border-box; box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3); transition: 0.3s; }
+        .promo-banner:hover { transform: scale(1.02); }
+        .promo-title { font-weight: 800; font-size: 15px; margin-bottom: 4px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .promo-sub { font-size: 11px; opacity: 0.9; }
+
+        .history-sec, .faq-sec { margin-top: 30px; width: 100%; max-width: 450px; text-align: left; }
+        .history-item { background: var(--card-bg); padding: 10px; border-radius: 10px; margin-bottom: 8px; font-size: 12px; border: 1px solid var(--border-color); display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-main); transition: 0.3s; cursor: pointer; }
+        .history-item:hover { border-color: var(--primary); background: var(--input-bg); }
+        .history-item img { width: 45px; height: 45px; border-radius: 8px; object-fit: cover; }
+
+        #historyList { transition: opacity 0.4s ease, transform 0.4s ease; }
+
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; width: 100%; max-width: 800px; margin-top: 30px; }
+
+        .result-box { position: relative; background: var(--card-bg); padding: 12px; border-radius: 20px; border: 1px solid var(--border-color); }
+        .hd-badge {
+            position: absolute; top: 20px; left: 20px; background: rgba(0, 0, 0, 0.6); color: #fbbf24;
+            padding: 4px 8px; border-radius: 6px; font-size: 10px; font-weight: 800;
+            z-index: 10; border: 1px solid #fbbf24; backdrop-filter: blur(4px); letter-spacing: 0.5px;
+        }
+        .result-box video, .result-box img { width: 100%; max-height: 400px; object-fit: contain; border-radius: 14px; background: #000; }
+
+        .dl-btn { display: block; padding: 12px; background: var(--primary); color: #fff; text-decoration: none; border-radius: 12px; text-align: center; font-weight: 600; margin-top: 10px; transition: 0.3s; font-size: 13px; }
+        .dl-btn.active { background: #f59e0b !important; cursor: not-allowed; opacity: 0.8; }
+        .dl-btn.success { background: #10b981 !important; }
+
+        details { background: var(--card-bg); padding: 12px 15px; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 10px; cursor: pointer; transition: 0.3s;}
+        summary { font-weight: 800; font-size: 13px; outline: none; }
+        details p { font-size: 12px; color: var(--text-muted); margin-top: 10px; line-height: 1.5; }
+
+        .wa-float { position: fixed; bottom: 25px; right: 25px; background: #25d366; color: #fff; border-radius: 50px; padding: 12px 20px; font-weight: 800; text-decoration: none; z-index: 1000; box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);}
+
+        .footer-brand { text-align: center; margin-top: 40px; margin-bottom: 100px; font-size: 13px; color: var(--text-muted); font-weight: 600; }
+
+        #toast {
+            visibility: hidden; min-width: 250px; background-color: #222; color: #fff;
+            text-align: center; border-radius: 10px; padding: 16px; position: fixed;
+            z-index: 9999; left: 50%; bottom: 30px; font-size: 13px; font-weight: 600;
+            transform: translateX(-50%); box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            opacity: 0; transition: opacity 0.3s, bottom 0.3s;
+        }
+        #toast.show { visibility: visible; opacity: 1; bottom: 50px; }
+
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: none; z-index: 2000; backdrop-filter: blur(5px); }
+        .modal-content { background: var(--card-bg); width: 85%; max-width: 350px; border-radius: 24px; padding: 30px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: var(--text-main); }
+        .modal-close { margin-top: 20px; background: var(--primary); color: white; padding: 12px 25px; border-radius: 12px; font-weight: 800; cursor: pointer; border: none;}
+
+        .offline-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-color);
+            z-index: 9999; display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; box-sizing: border-box;
+        }
+        .offline-icon { font-size: 60px; margin-bottom: 10px; animation: float 2s infinite ease-in-out; }
+
+        /* 🔥 SMART GRID DASHBOARD TABS (NAYA DESIGN) 🔥 */
+        .smart-grid-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 25px; }
+        @media (min-width: 500px) { .smart-grid-tabs { grid-template-columns: repeat(4, 1fr); } }
+
+        .grid-tab {
+            background: var(--input-bg); border: 2px solid var(--border-color); border-radius: 16px;
+            padding: 12px 5px; text-align: center; text-decoration: none; color: var(--text-muted);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .grid-tab:hover {
+            background: var(--card-bg); transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,0.06);
+            border-color: var(--primary);
+        }
+        .grid-tab.active {
+            background: rgba(0, 122, 255, 0.08); border-color: var(--primary); color: var(--primary);
+            box-shadow: 0 4px 12px rgba(0, 122, 255, 0.15); font-weight: 800;
+        }
+        .grid-tab .icon { font-size: 26px; margin-bottom: 6px; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1)); }
+        .grid-tab .text { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        .seo-footer { background: var(--card-bg); width: 100%; border-top: 1px solid var(--border-color); padding: 40px 20px; margin-top: 50px; text-align: center; box-sizing: border-box; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; max-width: 800px; margin: 0 auto; }
+        .footer-col h4 { color: var(--primary); font-size: 16px; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
+        .footer-col a { display: block; color: var(--text-main); text-decoration: none; font-size: 14px; font-weight: 600; margin-bottom: 10px; transition: 0.2s; }
+        .footer-col a:hover { color: var(--primary); }
+
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
+
+        /* 🔥 PC & TABLET RESPONSIVE FIX (FULL SCREEN MAGIC) 🔥 */
+        @media (min-width: 768px) {
+            .container { max-width: 800px; padding: 50px; }
+        }
+
+        /* 🏎️ PREMIUM SPEEDOMETER LOADER ANIMATION 🏎️ */
+        .speedo-loader-wrapper { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.9); z-index: 9999; backdrop-filter: blur(8px); align-items: center; justify-content: center; flex-direction: column; color: #fff; }
+        .gauge-container { position: relative; width: 150px; height: 150px; }
+        .gauge-circle { width: 100%; height: 100%; border: 8px solid rgba(255,255,255,0.1); border-top: 8px solid var(--primary); border-radius: 50%; animation: spin-gauge 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite; }
+        .gauge-needle { position: absolute; top: 50%; left: 50%; width: 60px; height: 4px; background: #ef4444; transform-origin: left center; transform: translate(0, -50%) rotate(-90deg); animation: swing-needle 2s ease-in-out infinite alternate; border-radius: 4px; box-shadow: 0 0 10px #ef4444; }
+        .loader-status-text { margin-top: 25px; font-size: 18px; font-weight: 700; color: #f8fafc; letter-spacing: 0.5px; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        .loader-sub-text { margin-top: 8px; font-size: 13px; color: #94a3b8; font-weight: 500; min-height: 20px; }
+
+        @keyframes spin-gauge { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes swing-needle { 0% { transform: translate(0, -50%) rotate(-45deg); } 50% { transform: translate(0, -50%) rotate(180deg); } 100% { transform: translate(0, -50%) rotate(120deg); } }
+
+    </style>
+    <script src="https://5gvci.com/act/files/tag.min.js?z=11040646" data-cfasync="false" async></script>
+</head>
+<body>
+
+    <div class="offline-overlay" id="offlineScreen">
+        <div class="offline-icon">📶</div>
+        <h2 id="offlineTitle">Oops! No Internet</h2>
+        <p style="color: var(--text-muted); font-size: 14px;" id="offlineSub">Aapka net band hai. Please turn on WiFi or Mobile Data to continue.</p>
+    </div>
+
+    <div class="top-bar">
+        <div class="top-left">
+            <span id="installApp" style="cursor:pointer; font-size: 11px; color: var(--primary); font-weight: bold; background: #e0f2fe; padding: 6px 10px; border-radius: 8px;">📲 Install</span>
+        </div>
+        <div class="top-center">
+            <span class="brand-name">Kartik Choudhary</span>
+        </div>
+        <div class="top-right">
+            <button class="icon-btn lang-btn" onclick="toggleLanguage()" id="langBtn">अ</button>
+            <button class="icon-btn" onclick="openHelp()">❓</button>
+            <button class="icon-btn" onclick="toggleTheme()" id="themeIcon">🌙</button>
+        </div>
+    </div>
+
+    <div class="live-ticker" id="ticker">🔥 <span id="tickerNum">14</span> people are downloading media right now...</div>
+
+    <div class="container">
+        <h1>AToZ<span class="highlight">Download</span></h1>
+
+        <p class="subtitle" id="mainSubtitle">{% if page_heading %}{{ page_heading }}{% else %}Free Download: Insta (Reels, DP, Story) | FB Video | 📺 YouTube{% endif %}</p>
+
+        <div class="stats-badge" id="statsBadge">🎉 You've saved <span id="totalSaved">0</span> media so far!</div>
+
+        <form action="/download" method="POST" id="mainForm" onsubmit="showLoader()">
+            <form action="/download" method="POST" id="mainForm" onsubmit="showLoader()">
+
+    <input type="hidden" name="active_tab" value="{% if active_tab %}{{ active_tab }}{% else %}auto{% endif %}">
+
+            <div class="smart-grid-tabs">
+            <a href="/" class="grid-tab {% if active_tab == 'auto' %}active{% endif %}">
+                <span class="icon">✨</span>
+                <span class="text">Auto</span>
+            </a>
+            <a href="/instagram-reels-downloader" class="grid-tab {% if active_tab == 'reels' %}active{% endif %}">
+                <span class="icon">📱</span>
+                <span class="text">Reels</span>
+            </a>
+            <a href="/youtube-downloader" class="grid-tab {% if active_tab == 'yt' %}active{% endif %}">
+                <span class="icon">📺</span>
+                <span class="text">YouTube</span>
+            </a>
+            <a href="/instagram-video-downloader" class="grid-tab {% if active_tab == 'video' %}active{% endif %}">
+                <span class="icon">▶️</span>
+                <span class="text">Video</span>
+            </a>
+            <a href="/instagram-photo-downloader" class="grid-tab {% if active_tab == 'photo' %}active{% endif %}">
+                <span class="icon">🖼️</span>
+                <span class="text">Photo</span>
+            </a>
+            <a href="/facebook-reels-downloader" class="grid-tab {% if active_tab == 'fb' %}active{% endif %}">
+                <span class="icon">🎞️</span>
+                <span class="text">FB Video</span>
+            </a>
+            <a href="/instagram-story-downloader" class="grid-tab {% if active_tab == 'story' %}active{% endif %}">
+                <span class="icon">🤳</span>
+                <span class="text">Story</span>
+            </a>
+            <a href="/instagram-highlight-downloader" class="grid-tab {% if active_tab == 'highlight' %}active{% endif %}">
+                <span class="icon">🌟</span>
+                <span class="text">Highlight</span>
+            </a>
+            <a href="/instagram-dp-viewer" class="grid-tab {% if active_tab == 'dp' %}active{% endif %}">
+                <span class="icon">👤</span>
+                <span class="text">DP</span>
+            </a>
+            <a href="/tiktok-downloader" class="grid-tab {% if active_tab == 'tiktok' %}active{% endif %}">
+                <span class="icon">🎵</span>
+                <span class="text">TikTok</span>
+            </a>
+            <a href="/twitter-downloader" class="grid-tab {% if active_tab == 'twitter' %}active{% endif %}">
+                <span class="icon">🐦</span>
+                <span class="text">Twitter</span>
+            </a>
+            <a href="/youtube-mp3" class="grid-tab {% if active_tab == 'ytmp3' %}active{% endif %}">
+                <span class="icon">🎧</span>
+                <span class="text">YT MP3</span>
+            </a>
+            <a href="/pinterest-downloader" class="grid-tab {% if active_tab == 'pinterest' %}active{% endif %}">
+                <span class="icon">📌</span>
+                <span class="text">Pinterest</span>
+            </a>
+            <a href="/threads-downloader" class="grid-tab {% if active_tab == 'threads' %}active{% endif %}">
+                <span class="icon">🧵</span>
+                <span class="text">Threads</span>
+            </a>
+        </div>
+
+            <div class="input-wrapper">
+                <input type="text" id="linkInput" name="url"
+                       placeholder="{% if active_tab == 'dp' %}Enter Insta Username...{% elif active_tab == 'video' %}Paste Instagram Video Link...{% elif active_tab == 'reels' %}Paste Instagram Reels Link...{% elif active_tab == 'photo' %}Paste Instagram Photo Link...{% elif active_tab == 'story' %}Paste Instagram Story Link...{% elif active_tab == 'highlight' %}Paste Instagram Highlight Link...{% else %}Paste Link here (Auto)...{% endif %}"
+                       required oninput="toggleInputBtns()">
+                <div class="action-btns">
+                    <button type="button" id="pasteBtn" class="action-btn" onclick="pasteFromClipboard()">📋 Paste</button>
+                    <button type="button" id="clearBtn" class="action-btn" onclick="clearInput()">✖️</button>
+                </div>
+            </div>
+            </div>
+
+            <!--<div class="input-wrapper">-->
+            <!--    <input type="text" id="linkInput" name="url" placeholder="Paste Link here (Auto)..." required oninput="toggleInputBtns()">-->
+            <!--    <div class="action-btns">-->
+            <!--        <button type="button" id="pasteBtn" class="action-btn" onclick="pasteFromClipboard()">📋 Paste</button>-->
+            <!--        <button type="button" id="clearBtn" class="action-btn" onclick="clearInput()">✖️</button>-->
+            <!--    </div>-->
+            <!--</div>-->
+
+            <button type="submit" class="fetch-btn" id="fetchBtn" onclick="playSound('click')">Download Now</button>
+
+            <div style="display:flex; justify-content:center; align-items:center; margin-top:15px; gap:8px;">
+                <label class="switch">
+                  <input type="checkbox" id="incognitoToggle" onchange="toggleIncognito(this)">
+                  <span class="slider round"></span>
+                </label>
+                <span style="font-size: 11px; font-weight: 600; color: var(--text-muted);" id="incognitoText">🕵️‍♂️ Incognito Mode</span>
+            </div>
+
+            <div style="margin-top: 15px; font-size: 11px; color: var(--text-muted); font-weight: 600; display:flex; justify-content:center; gap:5px;">
+                <span id="trustText">🔥 Trusted by 10,000+ Creators</span> | <span id="secureText">🔒 100% Free & Secure</span>
+            </div>
+
+<div id="loadingOverlay" class="speedo-loader-wrapper">
+        <div class="gauge-container">
+            <div class="gauge-circle"></div>
+            <div class="gauge-needle"></div>
+        </div>
+        <div id="loaderStatus" class="loader-status-text">Connecting to Server...</div>
+        <div id="loaderSubStatus" class="loader-sub-text">Establishing bypass tunnel</div>
+    </div>
+
+        </form>
+    </div>
+    {% if error %}
+    <div style="background: #fee2e2; border-left: 5px solid #ef4444; color: #991b1b; padding: 15px 20px; border-radius: 8px; margin: 25px auto 0; max-width: 600px; font-weight: 600; text-align: left; box-shadow: 0 4px 10px rgba(239, 68, 68, 0.1);">
+        ⚠️ <strong>Oops, Error:</strong> {{ error }}
+    </div>
+    {% endif %}
+
+<!-- 🔥 ONE-CLICK CAPTION & HASHTAG COPIER BOX 🔥 -->
+        {% if caption %}
+        <div class="caption-copier-box" style="background: var(--card-bg); padding: 20px; border-radius: 16px; margin: 20px auto; border: 1px solid var(--border-color); text-align: left; max-width: 550px; box-shadow: 0 8px 24px rgba(0,0,0,0.02);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <span style="font-weight: 700; font-size: 15px; color: var(--text-main); display: flex; align-items: center; gap: 6px;">
+                    📝 Title / Caption & Hashtags
+                </span>
+                <button type="button" id="copyCaptionBtn" onclick="copyCaptionText()" style="background: var(--primary); color: white; border: none; padding: 7px 14px; border-radius: 8px; font-size: 13px; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 4px; transition: all 0.2s;">
+                    📋 Copy Caption
+                </button>
+            </div>
+            <textarea id="captionTextArea" readonly style="width: 100%; height: 90px; background: var(--bg-color); color: var(--text-muted); border: 1px solid var(--border-color); border-radius: 10px; padding: 10px; resize: none; font-family: inherit; font-size: 13.5px; outline: none; box-sizing: border-box; line-height: 1.5;">{{ caption }}</textarea>
+        </div>
+
+        <script>
+        function copyCaptionText() {
+            var copyText = document.getElementById("captionTextArea");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); /* Mobile support */
+            navigator.clipboard.writeText(copyText.value);
+
+            var btn = document.getElementById("copyCaptionBtn");
+            var oldText = btn.innerHTML;
+
+            btn.innerHTML = "✅ Copied!";
+            btn.style.background = "#28a745"; /* Change to Green */
+
+            setTimeout(function() {
+                btn.innerHTML = oldText;
+                btn.style.background = "var(--primary)";
+            }, 2000);
+        }
+        </script>
+        {% endif %}
+
+    {% if media_list %}
+        <div class="grid-container">
+            {% for item in media_list %}
+            <div class="result-box">
+
+                {% if item.type == 'Video' %}
+                    <video src="{{ item.url }}" controls style="width: 100%; max-height: 400px; border-radius: 14px; background: #000;"></video>
+                {% elif item.type == 'Audio' %}
+                    <img src="{{ item.thumb }}" alt="Music Cover" style="width: 100%; border-radius: 14px; margin-bottom: 10px;">
+                    <audio controls style="width: 100%; outline: none; margin-bottom: 5px;">
+                        <source src="{{ item.url }}">
+                    </audio>
+                {% else %}
+                    <img src="{{ item.url }}" style="width: 100%; border-radius: 14px;">
+                {% endif %}
+
+                <div style="display: flex; gap: 8px; margin-top: 15px;">
+
+                    {% if item.type == 'Video' %}
+                        <a href="javascript:void(0)" onclick="directBrowserDownload('{{ item.url }}', 'AToZ_Video_{{ range(100, 999) | random }}.mp4', this)" class="dl-btn" style="flex: 2; margin-top: 0;">🎥 Download Video</a>
+
+                    {% elif item.type == 'Audio' %}
+                        <a href="javascript:void(0)" onclick="directBrowserDownload('{{ item.url }}', 'AToZ_Audio_{{ range(100, 999) | random }}.mp3', this)" class="dl-btn" style="flex: 2; margin-top: 0; background: #10b981;">🎧 Download MP3</a>
+
+                    {% else %}
+                        <a href="javascript:void(0)" onclick="directBrowserDownload('{{ item.url }}', 'AToZ_Photo_{{ range(100, 999) | random }}.jpg', this)" class="dl-btn" style="flex: 2; margin-top: 0;">📸 Download Photo</a>
+                    {% endif %}
+
+                </div>
+
+                <div style="display: flex; gap: 8px; margin-top: 10px;">
+                    <button onclick="shareMedia('{{ item.url }}')" class="action-btn" style="flex: 1; padding: 10px; background: #f1f5f9;">🟢 Share with Friends</button>
+                    <button onclick="showQR('{{ item.url }}')" class="action-btn" style="flex: 1; padding: 10px; background: #f1f5f9;">🔲 QR</button>
+                </div>
+
+            </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <a href="https://digitalrise.ct.ws/" target="_blank" class="promo-banner">
+        <div class="promo-title">⚡ Digital Rise Media 🚀</div>
+        <div class="promo-sub">Explore our premium digital tools & services. Tap to Visit ⚡</div>
+    </a>
+
+    <div class="history-sec" id="historySec">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <h4 style="margin: 0;" id="recentTitle">Recent Downloads</h4>
+            <button onclick="clearHistory()" style="background: none; border: none; font-size: 16px; cursor: pointer; color: var(--text-muted);" title="Clear History">🗑️</button>
+        </div>
+        <div id="historyList"></div>
+    </div>
+
+  <div class="seo-content-sec" style="margin-top: 40px; width: 100%; max-width: 800px; text-align: left; background: var(--card-bg); padding: 35px; border-radius: 24px; border: 1px solid var(--border-color); box-sizing: border-box; box-shadow: 0 10px 30px rgba(0,0,0,0.02); line-height: 1.8;">
+
+        {% if active_tab == 'video' %}
+            <h2>▶️ Instagram Video Downloader HD - Original Quality</h2>
+            <p>Instagram is a massive network for visual storytelling, entertainment, and education. However, the official platform restricts users from archiving or saving feed videos directly into their local hardware storage. Our professional <strong>Instagram Video Downloader</strong> bridges this structural gap by providing a high-speed, secure, and fully responsive platform to extract public Instagram videos in original MP4 layout without data loss.</p>
+
+            <h3>Key Technical Features:</h3>
+            <table style="width:100%; border-collapse: collapse; margin: 15px 0; font-size: 13px; color: var(--text-muted);">
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                    <th style="text-align:left; padding: 8px; color:var(--text-main);">Feature</th>
+                    <th style="text-align:left; padding: 8px; color:var(--text-main);">Capability</th>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                    <td style="padding: 8px;">Resolution Support</td>
+                    <td style="padding: 8px;">720p, 1080p Full HD original files</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                    <td style="padding: 8px;">Conversion Format</td>
+                    <td style="padding: 8px;">Standard MP4 (Highly compatible)</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                    <td style="padding: 8px;">Anonymity Layer</td>
+                    <td style="padding: 8px;">100% Secure via server proxy nodes</td>
+                </tr>
+            </table>
+
+            <h3>Detailed Step-by-Step Guide: How to Save Instagram Videos</h3>
+            <ol style="padding-left: 20px; color: var(--text-muted);">
+                <li><strong>Locate Content:</strong> Open your Instagram software app or web browser, look for the target feed video asset you need to store.</li>
+                <li><strong>Copy Source Link:</strong> Tap the options dot matrix or share icon, click on the <strong>"Copy Link"</strong> action anchor.</li>
+                <li><strong>Execute Extraction:</strong> Return to this specialized AToZ Video section, input the clean link code structure, and press "Download Now".</li>
+                <li><strong>Final Retrieval:</strong> Our high-performance scrapers pull the target file parameters. Click "Download Video" to route it into your local drive folder.</li>
+            </ol>
+
+            <h3>Frequently Asked Questions (Detailed FAQs)</h3>
+            <h4 style="color: var(--primary); margin-top: 20px;">Q1: Is there any limit on the video length or file size?</h4>
+            <p style="color: var(--text-muted);">No, our server architecture is built to process both short video snippets and heavy long-form IGTV format videos seamlessly without capping data speeds.</p>
+            <h4 style="color: var(--primary);">Q2: Do I need to create an account or input credentials?</h4>
+            <p style="color: var(--text-muted);">Never. Our network operates independently from Instagram API tokens, meaning your profile credentials are 100% hidden and safe from any database tracking loops.</p>
+
+        {% elif active_tab == 'reels' %}
+            <h2>📱 Instagram Reels Downloader - High-Fidelity MP4 With Audio</h2>
+            <p>Instagram Reels have redefined dynamic mobile short-form video creation, bundling creative soundtracks, viral sound effects, and high-definition pacing filters. If you are tracking the absolute best <strong>Instagram Reels Downloader without watermark</strong> systems online, AToZ Download delivers state-of-the-art parameters. We download clean raw MP4 structures directly from content delivery networks (CDN) for maximum clarity.</p>
+
+            <h3>Advanced Features for Content Production:</h3>
+            <ul style="padding-left: 20px; color: var(--text-muted); list-style-type: square;">
+                <li><strong>Zero Quality Loss:</strong> Pull true 1080p visual frame structures directly from cloud systems.</li>
+                <li><strong>Audio Track Sync:</strong> Advanced scripts download synchronized stereo tracks cleanly embedded in your video container.</li>
+                <li><strong>Exclusive Thumbnail Extractor:</strong> Utilize our built-in thumbnail processor node to instantly grab high-res cover templates in one action loop.</li>
+            </ul>
+
+            <h3>How to Download Instagram Reels (Mobile & Desktop Systems)</h3>
+            <p style="color: var(--text-muted);">Our unified core responds dynamically to all devices. To download any trending reel clip, follow this standard pattern:</p>
+            <ol style="padding-left: 20px; color: var(--text-muted);">
+                <li>Navigate to the precise Instagram Reel file inside your application layout window.</li>
+                <li>Tap the plane-shaped Share icon indicator link, then click on the explicit <strong>"Copy Link"</strong> panel button.</li>
+                <li>Drop the clean URL address string safely inside our specialized search box panel container at the top of this page.</li>
+                <li>Hit the action button, trigger the fluid Haptic confetti sequence engine, and securely retrieve your file into local memory space.</li>
+            </ol>
+
+            <h3>Frequently Asked Questions (Detailed FAQs)</h3>
+            <h4 style="color: var(--primary); margin-top: 20px;">Q1: Does the system reduce the file frame rates or resolutions?</h4>
+            <p style="color: var(--text-muted);">No, our scraping algorithm reads the original video manifest file properties and extracts the exact master copy resolution without putting extra rendering filters on top.</p>
+
+        {% elif active_tab == 'photo' %}
+            <h2>🖼️ Instagram Photo Downloader - Multi-Slide Carousel Infrastructure</h2>
+            <p>Instagram continues to serve as the global destination point for spectacular photography, aesthetic digital graphics, and high-value carousel infographic slides. Taking simple screen captures degrades visual fidelity, crops active dimensions, and destroys readability metrics. Our specialized <strong>Instagram Photo Downloader</strong> extracts uncompressed original JPEG/PNG files effortlessly.</p>
+
+            <h3>Full Carousel & Multi-Image Parse Support:</h3>
+            <p>Many professional creators deploy carousel content containing up to 10 stacked images. While typical utility apps fail to unpack complex carousel layers, our technical script parses the entire underlying metadata catalog array, providing individual download anchors for each slide panel asset independently.</p>
+
+            <h3>How to Store High-Resolution Instagram Photographs</h3>
+            <ol style="padding-left: 20px; color: var(--text-muted);">
+                <li>Open the primary Instagram frame and select the target photograph or grid carousel node.</li>
+                <li>Copy the active link token out from the address window frame or context layout panel.</li>
+                <li>Paste the path into the AToZ Photo module, execute the request, and check your asset previews down below instantly.</li>
+            </ol>
+
+            <h3>Frequently Asked Questions (Detailed FAQs)</h3>
+            <h4 style="color: var(--primary); margin-top: 20px;">Q1: Can I download images out from multi-photo carousel grids selectively?</h4>
+            <p style="color: var(--text-muted);">Yes, our platform splits carousel slideshows cleanly into independent image blocks so you can select and save only what you need, reducing mobile data waste.</p>
+
+        {% elif active_tab == 'dp' %}
+            <h2>📸 Instagram DP Viewer & Downloader - Ultra HD Full Size Zoom</h2>
+            <p>Have you ever encountered a newly requested contact node or profile handle and tried expanding their display avatar layout, only to notice that Instagram blocks profile magnification natively? Our premium-grade <strong>Insta DP Viewer</strong> is engineered to handle this structural system block. It enables visitors to scan, render, zoom, and safely extract any <strong>Instagram Profile Picture in full size</strong> cleanly without login protocols.</p>
+
+            <h3>High-Performance Core Analytics:</h3>
+            <table style="width:100%; border-collapse: collapse; margin: 15px 0; font-size: 13px; color: var(--text-muted);">
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                    <th style="text-align:left; padding: 8px; color:var(--text-main);">Process Mode</th>
+                    <th style="text-align:left; padding: 8px; color:var(--text-main);">Privacy Standard</th>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                    <td style="padding: 8px;">Username Query Scrape</td>
+                    <td style="padding: 8px;">100% Anonymous (No record saved)</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                    <td style="padding: 8px;">Profile Type Reach</td>
+                    <td style="padding: 8px;">Works for both Public and Private accounts</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                    <td style="padding: 8px;">File Output Structure</td>
+                    <td style="padding: 8px;">Highest resolution source graphic matrix</td>
+                </tr>
+            </table>
+
+            <h3>Simple Guide to Magnify & Extract Full-Size Insta DPs</h3>
+            <p style="color: var(--text-muted);">We eliminate messy link extractions for profile photos. Follow this streamlined workflow instead:</p>
+            <ol style="padding-left: 20px; color: var(--text-muted);">
+                <li>Locate the exact alpha-numeric account <strong>Username</strong> handle on Instagram (e.g., <code>leomessi</code>).</li>
+                <li>Ensure you are interacting within our dedicated 'DP' panel interface tab section.</li>
+                <li>Type or paste the raw text username string straight into the input box container layout.</li>
+                <li>Press the main action node. Our server-side script pulls the high-definition avatar path and showcases the full-size graphic file frame for swift saving.</li>
+            </ol>
+
+            <h3>Frequently Asked Questions (Detailed FAQs)</h3>
+            <h4 style="color: var(--primary); margin-top: 20px;">Q1: Will my profile identity be compromised or tracked by the target handle?</h4>
+            <p style="color: var(--text-muted);">Absolutely not. Our server nodes execute the query sequence routing completely outside the personal app ecosystem via independent scraper calls, making you completely invisible.</p>
+            <h4 style="color: var(--primary);">Q2: Does it extract high-quality avatars from locked private profiles?</h4>
+            <p style="color: var(--text-muted);">Yes, since display avatars serve as global public directory endpoints on the platform backend servers, our framework is able to parse and fetch the true original high-res picture file flawlessly.</p>
+
+        {% elif active_tab == 'story' %}
+            <h2>🤳 Instagram Story Downloader - Clean Anonymous Archive</h2>
+            <p>Instagram Stories drive massive real-time user metrics due to their short, fleeting nature—they automatically self-destruct and drop off grid visibility completely after 24 hours. When you require a reliable, professional tool to download dynamic business updates, life events, or viral clips before they disappear, our anonymous <strong>Instagram Story Saver</strong> provides maximum security loops.</p>
+
+            <h3>Advanced Anonymity Engine Framework:</h3>
+            <p>When you natively scroll through a creator's active story inside the official application interface, your identity handle is instantly indexed into their viewer tracking lists. By processing the story path string through our external secure proxy server network, you watch and archive the content completely anonymously without your name ever logging into their internal dashboard statistics.</p>
+
+            <h3>How to Securely Save Temporary Instagram Stories</h3>
+            <ul style="padding-left: 20px; color: var(--text-muted); list-style-type: disc;">
+                <li>Access the explicit profile container node, and launch the active story window.</li>
+                <li>Grab the complete tracking URL parameters straight out from your active device share panel module.</li>
+                <li>Drop the path clean into the AToZ Stories search engine panel to split video and image story elements cleanly for instant download access.</li>
+            </ul>
+
+        {% elif active_tab == 'highlight' %}
+            <h2>🌟 Instagram Highlight Downloader - Organize Permanent Archives</h2>
+            <p>Profile highlights allow brands, creators, and daily active accounts to save their best temporary stories into organized categorized bubbles placed right above their primary content grid. Our ultra-efficient <strong>Instagram Highlight Downloader</strong> automates the painful process of scanning these permanent bubbles, parsing the media stack array, and downloading all media assets directly into your physical storage drive.</p>
+
+            <h3>A Essential Tool for Market Research & Trend Analysis:</h3>
+            <p>Successful agencies and modern marketers utilize highlights to evaluate product roadmaps, user reviews, and promotional setups. Downloading these configurations piece-by-piece is incredibly slow. Our specialized code parses highlight timeline collections within fractions of a second, making it an indispensable asset for creators.</p>
+
+            <h3>How to Fast-Track Highlight Downloads</h3>
+            <ol style="padding-left: 20px; color: var(--text-muted);">
+                <li>Launch the target Instagram profile grid on your device, and click to open the exact Highlight circle node.</li>
+                <li>Copy the system URL from the link window or context share menu.</li>
+                <li>Paste the string here, execute the pipeline call, and collect all structured files instantly.</li>
+            </ol>
+
+        {% elif active_tab == 'fb' %}
+            <h2>🎞️ Facebook Reels Downloader - High-Speed Video Processing</h2>
+            <p>Facebook continues to hold a massive network share of hyper-viral short-form reels, high-value community video feeds, and creator entertainment updates. When you require an optimized, fast, and lightweight web environment to grab these media files, our advanced <strong>Facebook Reels Downloader</strong> executes peak data transfers. Grab public FB clips in uncompressed MP4 layouts securely.</p>
+
+            <h3>Multi-System Fluid Optimization:</h3>
+            <p>Our progressive application engine scales flawlessly across all computing paradigms. Whether you are running on desktop systems (Windows, MacOS, Linux) or mobile hardware arrays (Android, iOS mobile layouts), our pipelines adjust data caching on-the-fly to deliver unmatched file downloading speeds.</p>
+
+            <h3>How to Extract Facebook Short Videos & Reels</h3>
+            <ul style="padding-left: 20px; color: var(--text-muted); list-style-type: circle;">
+                <li>While scrolling Facebook, tap the primary "Share" node indicator placed on the reel content.</li>
+                <li>Select the explicit <strong>"Copy Link"</strong> option item block.</li>
+                <li>Come back here, paste the string asset into the clean FB input tab array, and click download.</li>
+            </ul>
+
+        {% else %}
+            <h2>⚡ All-in-One Instagram & Facebook Downloader (Pro Master Edition)</h2>
+            <p>Welcome to <strong>AToZ Download</strong>, the most reliable, modern, and architecture-optimized web-based platform tailored for seamless social media downloading. Our unified system delivers advanced, ultra-clean web utilities designed to pull raw media links, high-res photos, trending short video clips, dynamic profile highlights, and profile pictures straight out from cloud servers without compromising your security handle metrics.</p>
+
+            <h3>Built for Modern Web Standards & Extreme Performance</h3>
+            <p>We believe digital software applications should be blazingly fast and feature-rich. Our system is fully configured with clean, fluid dark mode parameters, responsive web layouts, tactical micro-vibration interactions, dynamic structural skeleton animations, and automated live traffic counter widgets that keep our system operating at elite industrial performance limits, closely competing with massive services like <code>indown.io</code>.</p>
+
+            <h3>Core Structural System Pillars:</h3>
+            <ul style="padding-left: 20px; color: var(--text-muted); line-height: 2;">
+                <li><strong>⚡ Intelligent Auto-Detect Core:</strong> Forget about manually selecting file folders or categories. Our high-performance routing script processes incoming text streams automatically, instantly identifying source platforms, file formats, and ideal server pathways for you.</li>
+                <li><strong>🔒 Complete Sandbox Privacy:</strong> Fully optimized to shield user footprints. Enjoy private browsing sandboxes, temporary file parsing, and data clearance protocols that protect your hardware profile handle from profiling data algorithms.</li>
+                <li><strong>📦 Progressive Web Application (PWA) Layer:</strong> Do away with heavy marketplace application downloads that consume vital storage and battery life cycles. Tap our native "Install" badge tool to add AToZ Download directly onto your screen for instant launch capabilities.</li>
+            </ul>
+        {% endif %}
+
+    </div>
+
+  <footer class="seo-footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Instagram Tools</h4>
+                <a href="/">⚡ Auto Detect Tool</a>
+                <a href="/instagram-video-downloader">▶️ Instagram Video Downloader</a>
+                <a href="/instagram-reels-downloader">📱 Instagram Reels Downloader</a>
+                <a href="/instagram-photo-downloader">🖼️ Instagram Photo Downloader</a>
+                <a href="/insta-dp-viewer">📸 Instagram DP Viewer</a>
+                <a href="/instagram-story-downloader">🤳 Instagram Story Downloader</a>
+                <a href="/instagram-highlight-downloader">🌟 Instagram Highlight Downloader</a>
+            </div>
+            <div class="footer-col">
+                <h4>Other Platforms</h4>
+                <a href="/facebook-reels-downloader">🎞️ Facebook Reels Downloader</a>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <a href="/about-us">About Us</a>
+                <a href="/privacy-policy">Privacy Policy</a>
+                <a href="/contact-us">Contact Us</a>
+            </div>
+        </div>
+        <div style="margin-top: 30px; font-size: 13px; color: var(--text-muted); font-weight: 600;">
+            © Copyright 2026 - AToZ Download Developed ⚡ by Kartik Choudhary
+        </div>
+    </footer>
+
+    <div class="modal-overlay" id="helpModal">
+        <div class="modal-content">
+            <h2 style="margin-top:0;">❓ How to Use</h2>
+            <div style="text-align:left; font-size:14px; line-height:1.8;">
+                1️⃣ Open Instagram or Facebook.<br>
+                2️⃣ Click <b>Share</b> & <b>Copy Link</b>.<br>
+                3️⃣ Paste the link in the search box.<br>
+                4️⃣ Click <b>Download Now</b>. Boom! 🚀
+            </div>
+            <button class="modal-close" onclick="closeHelp()">Got it!</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="qrModal">
+        <div class="modal-content">
+            <h2 style="margin-top:0;">Scan to Share 🚀</h2>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 15px;">Ask your friend to scan this QR code from their phone camera.</p>
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://atozdownloaderbykartik.pythonanywhere.com/" alt="QR Code" style="width: 200px; height: 200px; border-radius: 10px; margin: 0 auto; display: block; padding: 10px; background: white; border: 2px solid var(--border-color);">
+            <button class="modal-close" onclick="closeQR()">Close</button>
+        </div>
+    </div>
+
+    <a href="https://api.whatsapp.com/send?text=Bhai Insta (Reels, DP, Stories) aur FB reels download karne ki sabse unique website mil gayi: http://AtoZDownloaderBykartik.pythonanywhere.com" class="wa-float">Share</a>
+
+    <div id="toast"></div>
+
+    <script>
+        window.history.replaceState(null, null, "/");
+
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        function playSound(type) {
+            if(audioCtx.state === 'suspended') audioCtx.resume();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            if(type === 'click') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(600, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(1000, audioCtx.currentTime + 0.1);
+                gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.1);
+            } else if (type === 'success') {
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(400, audioCtx.currentTime);
+                osc.frequency.setValueAtTime(600, audioCtx.currentTime + 0.1);
+                osc.frequency.setValueAtTime(1000, audioCtx.currentTime + 0.2);
+                gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.3);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.3);
+            }
+        }
+
+        window.addEventListener('offline', () => { document.getElementById('offlineScreen').style.display = 'flex'; });
+        window.addEventListener('online', () => { document.getElementById('offlineScreen').style.display = 'none'; showToast("✅ Internet is Back Online!"); });
+
+        let currentLang = 'en';
+        function toggleLanguage() {
+            playSound('click');
+            currentLang = currentLang === 'en' ? 'hi' : 'en';
+            document.getElementById('langBtn').innerText = currentLang === 'en' ? 'अ' : 'A';
+
+            document.getElementById('mainSubtitle').innerText = currentLang === 'en' ? 'Insta (Reels, Stories, Highlights, DP) & FB Reels' : 'इंस्टा (रील्स, स्टोरीज़, डीपी) और एफबी रील्स डाउनलोड करें';
+            document.getElementById('fetchBtn').innerText = currentLang === 'en' ? 'Download Now' : 'अभी डाउनलोड करें';
+            document.getElementById('recentTitle').innerText = currentLang === 'en' ? 'Recent Downloads' : 'हाल ही में डाउनलोड किए गए';
+            document.getElementById('faqTitle').innerText = currentLang === 'en' ? 'Frequently Asked Questions' : 'सामान्य प्रश्न (FAQs)';
+            document.getElementById('chipAuto').innerText = currentLang === 'en' ? '⚡ Auto Detect' : '⚡ ऑटो डिटेक्ट';
+            document.getElementById('chipDp').innerText = currentLang === 'en' ? '📸 Insta DP' : '📸 इंस्टा डीपी';
+            document.getElementById('chipFb').innerText = currentLang === 'en' ? '🎞️ FB Reels' : '🎞️ एफबी रील्स';
+            document.getElementById('trustText').innerText = currentLang === 'en' ? '🔥 Trusted by 10,000+ Creators' : '🔥 10,000+ क्रिएटर्स का भरोसा';
+            document.getElementById('secureText').innerText = currentLang === 'en' ? '🔒 100% Free & Secure' : '🔒 100% फ्री और सुरक्षित';
+            document.getElementById('incognitoText').innerText = currentLang === 'en' ? '🕵️‍♂️ Incognito Mode' : '🕵️‍♂️ इंकॉग्निटो मोड';
+
+            const activeChip = document.querySelector('.chip.active').id;
+            if(activeChip === 'chipAuto') document.getElementById('linkInput').placeholder = currentLang === 'en' ? 'Paste Link here (Auto)...' : 'यहाँ लिंक पेस्ट करें (Auto)...';
+            if(activeChip === 'chipDp') document.getElementById('linkInput').placeholder = currentLang === 'en' ? 'Enter Insta Username...' : 'इंस्टा यूज़रनेम डालें...';
+            if(activeChip === 'chipFb') document.getElementById('linkInput').placeholder = currentLang === 'en' ? 'Paste FB Video Link...' : 'एफबी वीडियो लिंक पेस्ट करें...';
+
+            showToast(currentLang === 'en' ? "🌐 Language changed to English" : "🌐 भाषा हिंदी में बदल गई");
+            renderHistory();
+        }
+
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            let themeToSet = 'light';
+            if (savedTheme) { themeToSet = savedTheme; } else if (systemPrefersDark) { themeToSet = 'dark'; }
+            document.documentElement.setAttribute('data-theme', themeToSet);
+            document.getElementById('themeIcon').textContent = themeToSet === 'light' ? '🌙' : '☀️';
+        }
+        initTheme();
+
+        function toggleTheme() {
+            playSound('click');
+            const html = document.documentElement;
+            const theme = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', theme);
+            document.getElementById('themeIcon').textContent = theme === 'light' ? '🌙' : '☀️';
+            localStorage.setItem('theme', theme);
+        }
+
+        let isIncognito = false;
+        function toggleIncognito(cb) {
+            playSound('click');
+            isIncognito = cb.checked;
+            if(isIncognito) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                document.getElementById('themeIcon').textContent = '☀️';
+                showToast(currentLang === 'en' ? "🕵️‍♂️ Incognito ON (History disabled)" : "🕵️‍♂️ इंकॉग्निटो चालू (हिस्ट्री सेव नहीं होगी)");
+            } else {
+                initTheme();
+                showToast(currentLang === 'en' ? "🕵️‍♂️ Incognito OFF" : "🕵️‍♂️ इंकॉग्निटो बंद");
+            }
+        }
+
+        setInterval(() => {
+            const num = Math.floor(Math.random() * (35 - 12 + 1) + 12);
+            document.getElementById('tickerNum').innerText = num;
+        }, 6000);
+
+        function openHelp() { playSound('click'); document.getElementById('helpModal').style.display = 'block'; }
+        function closeHelp() { playSound('click'); document.getElementById('helpModal').style.display = 'none'; }
+
+        function openQR() { playSound('click'); document.getElementById('qrModal').style.display = 'block'; }
+        function closeQR() { playSound('click'); document.getElementById('qrModal').style.display = 'none'; }
+
+        function showToast(message) {
+            const toast = document.getElementById("toast");
+            toast.innerText = message;
+            toast.className = "show";
+            setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+
+        let totalCount = localStorage.getItem('totalMediaSaved') || 0;
+        if(totalCount > 0) {
+            document.getElementById('totalSaved').innerText = totalCount;
+            document.getElementById('statsBadge').style.opacity = '1';
+        }
+
+        function setMode(element, placeholderText) {
+            playSound('click');
+            document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+            element.classList.add('active');
+
+            let finalPlaceholder = placeholderText;
+            if(currentLang === 'hi') {
+                if(placeholderText.includes('Auto')) finalPlaceholder = 'यहाँ लिंक पेस्ट करें (Auto)...';
+                if(placeholderText.includes('Username')) finalPlaceholder = 'इंस्टा यूज़रनेम डालें...';
+                if(placeholderText.includes('FB')) finalPlaceholder = 'एफबी वीडियो लिंक पेस्ट करें...';
+            }
+
+            const inputField = document.getElementById('linkInput');
+            inputField.placeholder = finalPlaceholder;
+            inputField.focus();
+        }
+
+        async function pasteFromClipboard() {
+            playSound('click');
+            try {
+                const text = await navigator.clipboard.readText();
+                document.getElementById('linkInput').value = text;
+                toggleInputBtns();
+                if(text.includes('http')) { document.getElementById('fetchBtn').click(); }
+            } catch (err) { showToast("⚠️ Pehle Paste permission allow karein!"); }
+        }
+
+        document.getElementById('linkInput').addEventListener('paste', () => {
+            setTimeout(() => {
+                const text = document.getElementById('linkInput').value;
+                toggleInputBtns();
+                if(text.includes('http')) { document.getElementById('fetchBtn').click(); }
+            }, 100);
+        });
+
+        function clearInput() { playSound('click'); document.getElementById('linkInput').value = ''; toggleInputBtns(); }
+        function toggleInputBtns() {
+            const val = document.getElementById('linkInput').value;
+            document.getElementById('pasteBtn').style.display = val ? 'none' : 'block';
+            document.getElementById('clearBtn').style.display = val ? 'block' : 'none';
+        }
+
+        function showLoader() {
+            const overlay = document.getElementById("loadingOverlay");
+            const statusMain = document.getElementById("loaderStatus");
+            const statusSub = document.getElementById("loaderSubStatus");
+
+            overlay.style.display = "flex";
+
+            // 🔥 Live status lines badalna taaki user ko pro feel aaye 🔥
+            setTimeout(() => {
+                statusMain.innerHTML = "Bypassing Platform Security... 🔐";
+                statusSub.innerHTML = "Injecting proxy handshake protocol";
+            }, 1200);
+
+            setTimeout(() => {
+                statusMain.innerHTML = "Fetching High-Speed CDN Links... ⚡";
+                statusSub.innerHTML = "Extracting raw 1080p MP4 data blocks";
+            }, 2800);
+
+            setTimeout(() => {
+                statusMain.innerHTML = "Rendering Final Download Package... 📦";
+                statusSub.innerHTML = "Syncing stereo audio streams";
+            }, 4500);
+        }
+
+        function startDownload(btnElement, thumb, title, url, type) {
+            playSound('click');
+            const originalText = btnElement.innerHTML;
+            btnElement.innerHTML = currentLang === 'en' ? "⏳ Wait..." : "⏳ रुकें...";
+            btnElement.classList.add("active");
+            btnElement.style.pointerEvents = "none";
+
+            if (navigator.vibrate) { navigator.vibrate([100, 50, 100]); }
+
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#007AFF', '#10b981', '#fbbf24'] });
+
+            if(!isIncognito) {
+                totalCount++;
+                localStorage.setItem('totalMediaSaved', totalCount);
+                document.getElementById('totalSaved').innerText = totalCount;
+                document.getElementById('statsBadge').style.opacity = '1';
+
+                let history = JSON.parse(localStorage.getItem('instaHistory') || '[]');
+                history = history.filter(h => h.url !== url);
+                history.unshift({thumb, title, url, type});
+                localStorage.setItem('instaHistory', JSON.stringify(history.slice(0, 5)));
+                renderHistory();
+            }
+
+            setTimeout(() => {
+                playSound('success');
+                btnElement.innerHTML = "✅ Done";
+                btnElement.classList.remove("active");
+                btnElement.classList.add("success");
+                showToast(currentLang === 'en' ? "🚀 Downloading Started!" : "🚀 डाउनलोड शुरू हो गया!");
+                setTimeout(() => {
+                    btnElement.innerHTML = originalText;
+                    btnElement.classList.remove("success");
+                    btnElement.style.pointerEvents = "auto";
+                }, 3000);
+            }, 3000);
+        }
+
+        function clearHistory() {
+            playSound('click');
+            const list = document.getElementById('historyList');
+            if(!list.children.length || list.innerText.includes('Nothing') || list.innerText.includes('अभी तक')) return;
+
+            list.style.opacity = '0';
+            list.style.transform = 'scale(0.95)';
+
+            setTimeout(() => {
+                localStorage.removeItem('instaHistory');
+                renderHistory();
+                list.style.opacity = '1';
+                list.style.transform = 'scale(1)';
+                showToast(currentLang === 'en' ? "🗑️ History Cleared!" : "🗑️ हिस्ट्री डिलीट हो गई!");
+            }, 400);
+        }
+
+        function renderHistory() {
+            const list = document.getElementById('historyList');
+            const history = JSON.parse(localStorage.getItem('instaHistory') || '[]');
+            if(history.length === 0) {
+                list.innerHTML = `<p style='color:gray; font-size:12px;'>${currentLang === 'en' ? 'Nothing downloaded yet.' : 'अभी तक कुछ डाउनलोड नहीं किया।'}</p>`;
+                return;
+            }
+
+            list.innerHTML = history.filter(item => item.url).map(item => `
+                <a href="/force_download?url=${encodeURIComponent(item.url)}&type=${item.type}&title=${encodeURIComponent(item.title)}" class="history-item">
+                    <img src="/proxy_image?url=${encodeURIComponent(item.thumb)}">
+                    <div style="display:flex; flex-direction:column;">
+                        <span style="font-weight:600; font-size: 13px;">${item.title.substring(0,25)}...</span>
+                        <span style="font-size:11px; color:var(--primary); font-weight:800; margin-top:2px;">⬇️ ${currentLang === 'en' ? 'Tap to Download' : 'डाउनलोड के लिए दबाएं'}</span>
+                    </div>
+                </a>
+            `).join('');
+        }
+        renderHistory();
+
+        async function togglePiP(btn) {
+            playSound('click');
+            const video = btn.closest('.result-box').querySelector('video');
+            if (document.pictureInPictureElement) {
+                await document.exitPictureInPicture();
+            } else if (video) {
+                if (video.readyState >= 1) {
+                    await video.requestPictureInPicture();
+                } else {
+                    showToast(currentLang === 'en' ? "⏳ Let the video load first!" : "⏳ पहले वीडियो लोड होने दें!");
+                }
+            }
+        }
+
+        let deferredPrompt = null;
+        window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredPrompt = e; });
+
+        document.getElementById('installApp').addEventListener('click', async () => {
+            playSound('click');
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') { showToast(currentLang === 'en' ? "🚀 App is installing in background!" : "🚀 ऐप बैकग्राउंड में इंस्टॉल हो रहा है!"); }
+                deferredPrompt = null;
+            } else {
+                showToast(currentLang === 'en' ? "✅ App is already installed! Check Home Screen." : "✅ ऐप पहले से ही इंस्टॉल है! होम स्क्रीन चेक करें।");
+            }
+        });
+
+        // 🔥 BRAHMASTRA: FORCE AUTO-UPDATE FOR OLD USERS 🔥
+        const CURRENT_VERSION = "v2.0"; // Naya version set kiya
+        if (localStorage.getItem("app_version") !== CURRENT_VERSION) {
+            // Agar purana user hai, toh uski background cache delete maaro
+            if ('caches' in window) {
+                caches.keys().then(names => {
+                    names.forEach(name => caches.delete(name));
+                });
+            }
+            // Naya version save karo aur auto-refresh kar do
+            localStorage.setItem("app_version", CURRENT_VERSION);
+            window.location.reload(true);
+        }
+
+        // Service Worker me hamesha naya update check karne ka hack (?v=time)
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js?v=' + new Date().getTime());
+        }
+
+
+       async function directBrowserDownload(videoUrl, fileName, btnElement) {
+    const originalText = btnElement.innerHTML;
+    const originalBg = btnElement.style.background;
+
+    // ⏳ Step 1: Loading dikhao
+    btnElement.innerHTML = "⏳ Processing Link...";
+    btnElement.style.pointerEvents = "none";
+    btnElement.style.opacity = "0.7";
+
+    try {
+        // Browser se background download try karna
+        const response = await fetch(videoUrl);
+        if (!response.ok) throw new Error('CORS Blocked');
+
+        const blob = await response.blob();
+        const blobUrl = window.URL.createObjectURL(blob);
+
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = blobUrl;
+        a.download = fileName;
+        document.body.appendChild(a);
+        a.click();
+
+        window.URL.revokeObjectURL(blobUrl);
+        document.body.removeChild(a);
+
+        btnElement.innerHTML = "✅ Downloaded!";
+        btnElement.style.pointerEvents = "auto";
+        btnElement.style.opacity = "1";
+    } catch (error) {
+        // 🚀 Step 2: YouTube CORS Block hone par ye jadoo chalega
+        console.log("YouTube CORS Blocked. Opening via Smart UI Fallback...");
+
+        // Button ka rang aur text badlo taaki user ko instruction mile
+        btnElement.innerHTML = "📲 Click 3-Dots (⋮) in New Tab to Save";
+        btnElement.style.background = "#eab308"; // Mast Yellow Alert color
+        btnElement.style.color = "#000";
+        btnElement.style.opacity = "1";
+
+        // 1 second ka gap dekar naye tab me kholo taaki user text padh sake
+        setTimeout(() => {
+            window.open(videoUrl, '_blank');
+            btnElement.style.pointerEvents = "auto";
+        }, 1200);
+
+        // 6 second baad button ko wapas normal kar do
+        setTimeout(() => {
+            btnElement.innerHTML = originalText;
+            btnElement.style.background = originalBg;
+            btnElement.style.color = "";
+        }, 6000);
+    }
+}
+    </script>
+</body>
+</html>
