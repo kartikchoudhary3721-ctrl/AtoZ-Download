@@ -529,13 +529,13 @@ def download():
                 return render_template('index.html', error=f"Twitter API Failed: {tw_err}", active_tab=current_tab)
 
       # 🔥 ENGINE 7: THREADS (NEW UNLIMITED API) 🔥
-# 🔥 ENGINE 7: THREADS (THE INSTAGRAM BYPASS HACK) 🔥
+# 🔥 ENGINE 7: THREADS (INSTAGRAM BYPASS + VIP PASS COOKIES) 🔥
         if 'threads.net' in url or 'threads.com' in url:
             try:
                 import yt_dlp
+                import os
                 
-                # 1. Threads aur Instagram ka backend SAME hai! 
-                # Hum Threads URL se uski "Post ID" nikalenge aur usko Instagram URL bana denge.
+                # 1. Post ID nikalna
                 post_id = ""
                 if '/post/' in url:
                     post_id = url.split('/post/')[1].split('?')[0].split('/')[0]
@@ -543,15 +543,19 @@ def download():
                 if not post_id:
                     return render_template('index.html', error="Bhai, is link mein se Post ID nahi mil rahi.", active_tab=current_tab)
 
-                # 2. Ye hai hamara Masterstroke (Threads ID = Instagram ID)
                 insta_hack_url = f"https://www.instagram.com/p/{post_id}/"
                 
-                # 3. Ab hum apne Baahubali (yt-dlp) ko Instagram ka saaf link denge
+                # 2. Baahubali ki Settings aur VIP Pass (Cookies)
                 ydl_opts = {
                     'quiet': True,
                     'no_warnings': True,
                 }
                 
+                # 🍪 Agar server par cookies.txt rakhi hai, toh usko as a Login Pass use karo!
+                if os.path.exists('cookies.txt'):
+                    ydl_opts['cookiefile'] = 'cookies.txt'
+                
+                # 3. Final Download
                 with yt_dlp.YoutubeDL(ydl_opts) as ydl:
                     info = ydl.extract_info(insta_hack_url, download=False)
                     
@@ -577,7 +581,7 @@ def download():
                         return render_template('index.html', error="Bhai, Instagram bypass trick ne bhi media chhupa liya.", active_tab=current_tab)
 
             except Exception as th_err:
-                return render_template('index.html', error=f"Threads Hack Failed: {str(th_err)}", active_tab=current_tab)
+                return render_template('index.html', error=f"Threads VIP Hack Failed: {str(th_err)}", active_tab=current_tab)
         # 🔥 ENGINE 2: INSTAGRAM
 
         # 🔥 ENGINE 2: INSTAGRAM
