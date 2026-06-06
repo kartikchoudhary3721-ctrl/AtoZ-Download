@@ -529,48 +529,80 @@ def download():
                 return render_template('index.html', error=f"Twitter API Failed: {tw_err}", active_tab=current_tab)
 
       # 🔥 ENGINE 7: THREADS (NEW UNLIMITED API) 🔥
- # 🔥 ENGINE 7: THREADS (YT-DLP CLEAN URL - THE BAAHUBALI RETURN) 🔥
+# 🔥 ENGINE 7: THREADS (INDESTRUCTIBLE DUAL-ENGINE) 🔥
         if 'threads.net' in url or 'threads.com' in url:
             try:
-                import yt_dlp
+                import re
                 
-                # 1. KACHRA SAAF KARNA (Master Stroke)
-                # URL se .com hata kar .net lagana aur '?' ke aage ka saara tracking kachra hatana
+                # 1. KACHRA SAAF KARNA (URL ko direct Threads format me lana)
                 clean_url = url.replace('threads.com', 'threads.net').split('?')[0]
                 
-                ydl_opts = {
-                    'quiet': True,
-                    'no_warnings': True,
-                }
+                dl_link = None
+                media_type = "Video"
+                thumb = ""
                 
-                with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-                    # Yahan hum saaf kiya hua link (clean_url) bhej rahe hain
-                    info = ydl.extract_info(clean_url, download=False)
+                # --- LAYER 1: UNDERGROUND BOT APIs (100% Free & Fast) ---
+                api_urls = [
+                    f"https://api.siputzx.my.id/api/d/threads?url={clean_url}",
+                    f"https://api.ryzendesu.vip/api/downloader/threads?url={clean_url}"
+                ]
+                
+                for api in api_urls:
+                    try:
+                        res = requests.get(api, timeout=10)
+                        if res.status_code == 200:
+                            # Smart Data Catcher (Bina JSON format ki tension ke direct URL pakadna)
+                            json_str = str(res.json()).replace('\\/', '/')
+                            
+                            # Video Link Dhoondhna
+                            mp4_links = re.findall(r'(https?://[^\s"\'<>\[\]\{\}]+?\.mp4[^\s"\'<>\[\]\{\}]*)', json_str)
+                            if mp4_links:
+                                dl_link = mp4_links[0]
+                                break
+                            
+                            # Agar Video nahi, toh Photo Link Dhoondhna
+                            jpg_links = re.findall(r'(https?://[^\s"\'<>\[\]\{\}]+?\.jpg[^\s"\'<>\[\]\{\}]*)', json_str)
+                            if jpg_links:
+                                dl_link = jpg_links[0]
+                                media_type = "Photo"
+                                break
+                    except:
+                        continue
+                        
+                # --- LAYER 2: RAW HTML X-RAY (Agar saari APIs fail ho jayein) ---
+                if not dl_link:
+                    headers = {
+                        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+                    }
+                    html_res = requests.get(clean_url, headers=headers, timeout=15)
+                    html = html_res.text.replace('\\/', '/')
                     
-                    dl_link = info.get('url')
-                    video_title = info.get('description') or info.get('title') or "Threads Media"
-                    thumb = info.get('thumbnail') or ""
-                    media_type = "Video"
-                    
-                    # Agar by-chance post mein video ki jagah sirf photo ho
-                    if info.get('ext') in ['jpg', 'png', 'webp'] or info.get('vcodec') == 'none':
-                        media_type = "Photo"
-                        if not dl_link:
-                            dl_link = thumb
-
-                    if dl_link:
-                        media_list.append({
-                            'type': media_type,
-                            'url': dl_link,
-                            'thumb': thumb if thumb else dl_link,
-                            'title': video_title[:30]
-                        })
-                        return render_template('index.html', media_list=media_list, caption=video_title, active_tab=current_tab)
+                    # Direct HTML se .mp4 nikalna
+                    mp4_matches = re.findall(r'(https?://[^\s"\'<>\[\]\{\}]+?\.mp4[^\s"\'<>\[\]\{\}]*)', html)
+                    if mp4_matches:
+                        dl_link = mp4_matches[0]
                     else:
-                        return render_template('index.html', error="Bhai, is Threads link mein media nahi mila.", active_tab=current_tab)
+                        # Direct HTML se .jpg nikalna
+                        jpg_matches = re.findall(r'(https?://[^\s"\'<>\[\]\{\}]+?\.jpg[^\s"\'<>\[\]\{\}]*)', html)
+                        if jpg_matches:
+                            # HD Quality ke liye sabse lamba URL uthana
+                            dl_link = sorted(jpg_matches, key=len, reverse=True)[0]
+                            media_type = "Photo"
+
+                # --- FINAL OUTPUT ---
+                if dl_link:
+                    media_list.append({
+                        'type': media_type,
+                        'url': dl_link,
+                        'thumb': dl_link, # Backup Thumbnail
+                        'title': "Threads Media"
+                    })
+                    return render_template('index.html', media_list=media_list, caption="Threads Media", active_tab=current_tab)
+                else:
+                    return render_template('index.html', error="Bhai, is post mein ya toh media hi nahi hai, ya ye account private hai jiski wajah se server block kar raha hai.", active_tab=current_tab)
 
             except Exception as th_err:
-                return render_template('index.html', error=f"Threads yt-dlp Failed: {str(th_err)}", active_tab=current_tab)
+                return render_template('index.html', error=f"Threads Dual-Engine Failed: {str(th_err)}", active_tab=current_tab)
         # 🔥 ENGINE 2: INSTAGRAM
 
         # 🔥 ENGINE 2: INSTAGRAM
