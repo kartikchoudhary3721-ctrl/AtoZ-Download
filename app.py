@@ -529,53 +529,56 @@ def download():
                 return render_template('index.html', error=f"Twitter API Failed: {tw_err}", active_tab=current_tab)
 
       # 🔥 ENGINE 7: THREADS (NEW UNLIMITED API) 🔥
-    # 🔥 ENGINE 7: THREADS (DIRECT BS4 SCRAPER - PRO HACK) 🔥
+   # 🔥 ENGINE 7: THREADS (COBALT - THE ULTIMATE FREE API) 🔥
         if 'threads.net' in url or 'threads.com' in url:
             try:
-                from bs4 import BeautifulSoup
+                # Cobalt ekdum free, unlimited aur bina API key wala open-source tool hai.
+                # Ye sirf isliye chal raha hai kyunki humara server ab free hai!
+                api_url = "https://api.cobalt.tools/api/json"
                 
-                # Trick: Hum Threads server ko bolenge ki hum "WhatsApp" hain, 
-                # taaki wo bina JS load kiye seedha MP4 video aur image de de!
                 headers = {
-                    "User-Agent": "WhatsApp/2.21.12.21 A"
+                    "Accept": "application/json",
+                    "Content-Type": "application/json",
+                    "User-Agent": "DigitalRiseMedia/1.0"
                 }
                 
-                # Safety ke liye threads.com ko threads.net mein badalna
-                clean_url = url.replace('threads.com', 'threads.net')
+                payload = {
+                    "url": url,
+                    "vQuality": "720" # HD quality ke liye
+                }
                 
-                response = requests.get(clean_url, headers=headers, timeout=15)
-                soup = BeautifulSoup(response.text, 'html.parser')
+                response = requests.post(api_url, json=payload, headers=headers, timeout=15)
+                data = response.json()
                 
                 dl_link = None
-                media_type = "Photo"
-                thumb = ""
+                media_type = "Video"
                 
-                # Page ke andar chhupi hui 'meta' tags (jahan real link hote hain) nikalna
-                video_tag = soup.find("meta", property="og:video") or soup.find("meta", property="og:video:secure_url")
-                image_tag = soup.find("meta", property="og:image")
-                
-                if video_tag and video_tag.get("content"):
-                    dl_link = video_tag.get("content")
-                    media_type = "Video"
-                elif image_tag and image_tag.get("content"):
-                    dl_link = image_tag.get("content")
-                    
-                if image_tag and image_tag.get("content"):
-                    thumb = image_tag.get("content")
-                    
+                # Cobalt ka mast simple logic
+                if data and isinstance(data, dict):
+                    if data.get('url'):
+                        dl_link = data.get('url')
+                    # Agar ek post mein multiple photo/video hain (Carousel)
+                    elif data.get('picker') and isinstance(data['picker'], list) and len(data['picker']) > 0:
+                        dl_link = data['picker'][0].get('url')
+                        
                 if dl_link:
+                    # Check agar media photo hai
+                    if dl_link.endswith('.jpg') or dl_link.endswith('.png') or dl_link.endswith('.webp'):
+                        media_type = "Photo"
+
                     media_list.append({
                         'type': media_type,
                         'url': dl_link,
-                        'thumb': thumb if thumb else dl_link,
+                        'thumb': dl_link,
                         'title': "Threads Media"
                     })
                     return render_template('index.html', media_list=media_list, caption="Threads Media", active_tab=current_tab)
                 else:
-                    return render_template('index.html', error="Bhai, is Threads link mein media chhipa hua hai ya page private hai.", active_tab=current_tab)
+                    safe_data = str(data)[:500]
+                    return render_template('index.html', error=f"Bhai, Cobalt ne ye bheja: {safe_data}", active_tab=current_tab)
 
             except Exception as th_err:
-                return render_template('index.html', error=f"Threads Scraper Failed: {str(th_err)}", active_tab=current_tab)
+                return render_template('index.html', error=f"Threads Ultimate Engine Failed: {str(th_err)}", active_tab=current_tab)
         # 🔥 ENGINE 2: INSTAGRAM
 
         # 🔥 ENGINE 2: INSTAGRAM
