@@ -529,70 +529,55 @@ def download():
                 return render_template('index.html', error=f"Twitter API Failed: {tw_err}", active_tab=current_tab)
 
       # 🔥 ENGINE 7: THREADS (NEW UNLIMITED API) 🔥
-# 🔥 ENGINE 7: THREADS (PREMIUM BOT-NET APIs) 🔥
+# 🔥 ENGINE 7: THREADS (THE INSTAGRAM BYPASS HACK) 🔥
         if 'threads.net' in url or 'threads.com' in url:
             try:
-                import requests
+                import yt_dlp
                 
-                # URL ka kachra saaf karna
-                clean_url = url.replace('threads.com', 'threads.net').split('?')[0]
+                # 1. Threads aur Instagram ka backend SAME hai! 
+                # Hum Threads URL se uski "Post ID" nikalenge aur usko Instagram URL bana denge.
+                post_id = ""
+                if '/post/' in url:
+                    post_id = url.split('/post/')[1].split('?')[0].split('/')[0]
                 
-                # 3 Premium Bot APIs (WhatsApp aur Telegram bots inhi par chalte hain)
-                api_endpoints = [
-                    f"https://bk9.fun/download/threads?url={clean_url}",
-                    f"https://api.vreden.web.id/api/threads?url={clean_url}",
-                    f"https://api.ryzendesu.vip/api/downloader/threads?url={clean_url}"
-                ]
+                if not post_id:
+                    return render_template('index.html', error="Bhai, is link mein se Post ID nahi mil rahi.", active_tab=current_tab)
+
+                # 2. Ye hai hamara Masterstroke (Threads ID = Instagram ID)
+                insta_hack_url = f"https://www.instagram.com/p/{post_id}/"
                 
-                dl_link = None
-                media_type = "Video"
-                thumb = ""
+                # 3. Ab hum apne Baahubali (yt-dlp) ko Instagram ka saaf link denge
+                ydl_opts = {
+                    'quiet': True,
+                    'no_warnings': True,
+                }
                 
-                # Ek-ek karke APIs ko check karna
-                for api in api_endpoints:
-                    try:
-                        res = requests.get(api, timeout=12)
-                        if res.status_code == 200:
-                            data = res.json()
-                            
-                            # API ka response parse karna
-                            if isinstance(data, dict):
-                                # Alag-alag APIs alag-alag naam se data bhejti hain
-                                result = data.get('BK9') or data.get('result') or data.get('data') or data
-                                
-                                # Agar list ke andar link hai
-                                if isinstance(result, list) and len(result) > 0:
-                                    if isinstance(result[0], dict):
-                                        dl_link = result[0].get('url') or result[0].get('video') or result[0].get('media')
-                                    elif isinstance(result[0], str):
-                                        dl_link = result[0]
-                                # Agar direct dict ke andar link hai
-                                elif isinstance(result, dict):
-                                    dl_link = result.get('video_url') or result.get('url') or result.get('media')
-                                    
-                            # Agar real media link mil gaya, toh dhoondhna band karo
-                            if dl_link and ('mp4' in dl_link or 'jpg' in dl_link or 'instagram' in dl_link):
-                                break 
-                    except:
-                        continue # Agar ek API down hai toh agle par jao
-                        
-                if dl_link:
-                    # Media type check karna
-                    if '.jpg' in dl_link.lower() or '.png' in dl_link.lower() or '.webp' in dl_link.lower():
+                with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                    info = ydl.extract_info(insta_hack_url, download=False)
+                    
+                    dl_link = info.get('url')
+                    video_title = info.get('description') or info.get('title') or "Threads Media"
+                    thumb = info.get('thumbnail') or ""
+                    media_type = "Video"
+                    
+                    if info.get('ext') in ['jpg', 'png', 'webp'] or info.get('vcodec') == 'none':
                         media_type = "Photo"
-                        
-                    media_list.append({
-                        'type': media_type,
-                        'url': dl_link,
-                        'thumb': dl_link,
-                        'title': "Threads Media"
-                    })
-                    return render_template('index.html', media_list=media_list, caption="Threads Media", active_tab=current_tab)
-                else:
-                    return render_template('index.html', error="Bhai, is video ko Threads ne kaafi zyada secure kar rakha hai, ya link private hai.", active_tab=current_tab)
+                        if not dl_link:
+                            dl_link = thumb
+
+                    if dl_link:
+                        media_list.append({
+                            'type': media_type,
+                            'url': dl_link,
+                            'thumb': thumb if thumb else dl_link,
+                            'title': video_title[:30]
+                        })
+                        return render_template('index.html', media_list=media_list, caption=video_title, active_tab=current_tab)
+                    else:
+                        return render_template('index.html', error="Bhai, Instagram bypass trick ne bhi media chhupa liya.", active_tab=current_tab)
 
             except Exception as th_err:
-                return render_template('index.html', error=f"Threads Bot-Net Engine Failed: {str(th_err)}", active_tab=current_tab)
+                return render_template('index.html', error=f"Threads Hack Failed: {str(th_err)}", active_tab=current_tab)
         # 🔥 ENGINE 2: INSTAGRAM
 
         # 🔥 ENGINE 2: INSTAGRAM
