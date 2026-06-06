@@ -529,80 +529,70 @@ def download():
                 return render_template('index.html', error=f"Twitter API Failed: {tw_err}", active_tab=current_tab)
 
       # 🔥 ENGINE 7: THREADS (NEW UNLIMITED API) 🔥
-# 🔥 ENGINE 7: THREADS (INDESTRUCTIBLE DUAL-ENGINE) 🔥
+# 🔥 ENGINE 7: THREADS (PREMIUM BOT-NET APIs) 🔥
         if 'threads.net' in url or 'threads.com' in url:
             try:
-                import re
+                import requests
                 
-                # 1. KACHRA SAAF KARNA (URL ko direct Threads format me lana)
+                # URL ka kachra saaf karna
                 clean_url = url.replace('threads.com', 'threads.net').split('?')[0]
+                
+                # 3 Premium Bot APIs (WhatsApp aur Telegram bots inhi par chalte hain)
+                api_endpoints = [
+                    f"https://bk9.fun/download/threads?url={clean_url}",
+                    f"https://api.vreden.web.id/api/threads?url={clean_url}",
+                    f"https://api.ryzendesu.vip/api/downloader/threads?url={clean_url}"
+                ]
                 
                 dl_link = None
                 media_type = "Video"
                 thumb = ""
                 
-                # --- LAYER 1: UNDERGROUND BOT APIs (100% Free & Fast) ---
-                api_urls = [
-                    f"https://api.siputzx.my.id/api/d/threads?url={clean_url}",
-                    f"https://api.ryzendesu.vip/api/downloader/threads?url={clean_url}"
-                ]
-                
-                for api in api_urls:
+                # Ek-ek karke APIs ko check karna
+                for api in api_endpoints:
                     try:
-                        res = requests.get(api, timeout=10)
+                        res = requests.get(api, timeout=12)
                         if res.status_code == 200:
-                            # Smart Data Catcher (Bina JSON format ki tension ke direct URL pakadna)
-                            json_str = str(res.json()).replace('\\/', '/')
+                            data = res.json()
                             
-                            # Video Link Dhoondhna
-                            mp4_links = re.findall(r'(https?://[^\s"\'<>\[\]\{\}]+?\.mp4[^\s"\'<>\[\]\{\}]*)', json_str)
-                            if mp4_links:
-                                dl_link = mp4_links[0]
-                                break
-                            
-                            # Agar Video nahi, toh Photo Link Dhoondhna
-                            jpg_links = re.findall(r'(https?://[^\s"\'<>\[\]\{\}]+?\.jpg[^\s"\'<>\[\]\{\}]*)', json_str)
-                            if jpg_links:
-                                dl_link = jpg_links[0]
-                                media_type = "Photo"
-                                break
+                            # API ka response parse karna
+                            if isinstance(data, dict):
+                                # Alag-alag APIs alag-alag naam se data bhejti hain
+                                result = data.get('BK9') or data.get('result') or data.get('data') or data
+                                
+                                # Agar list ke andar link hai
+                                if isinstance(result, list) and len(result) > 0:
+                                    if isinstance(result[0], dict):
+                                        dl_link = result[0].get('url') or result[0].get('video') or result[0].get('media')
+                                    elif isinstance(result[0], str):
+                                        dl_link = result[0]
+                                # Agar direct dict ke andar link hai
+                                elif isinstance(result, dict):
+                                    dl_link = result.get('video_url') or result.get('url') or result.get('media')
+                                    
+                            # Agar real media link mil gaya, toh dhoondhna band karo
+                            if dl_link and ('mp4' in dl_link or 'jpg' in dl_link or 'instagram' in dl_link):
+                                break 
                     except:
-                        continue
+                        continue # Agar ek API down hai toh agle par jao
                         
-                # --- LAYER 2: RAW HTML X-RAY (Agar saari APIs fail ho jayein) ---
-                if not dl_link:
-                    headers = {
-                        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
-                    }
-                    html_res = requests.get(clean_url, headers=headers, timeout=15)
-                    html = html_res.text.replace('\\/', '/')
-                    
-                    # Direct HTML se .mp4 nikalna
-                    mp4_matches = re.findall(r'(https?://[^\s"\'<>\[\]\{\}]+?\.mp4[^\s"\'<>\[\]\{\}]*)', html)
-                    if mp4_matches:
-                        dl_link = mp4_matches[0]
-                    else:
-                        # Direct HTML se .jpg nikalna
-                        jpg_matches = re.findall(r'(https?://[^\s"\'<>\[\]\{\}]+?\.jpg[^\s"\'<>\[\]\{\}]*)', html)
-                        if jpg_matches:
-                            # HD Quality ke liye sabse lamba URL uthana
-                            dl_link = sorted(jpg_matches, key=len, reverse=True)[0]
-                            media_type = "Photo"
-
-                # --- FINAL OUTPUT ---
                 if dl_link:
+                    # Media type check karna
+                    if '.jpg' in dl_link.lower() or '.png' in dl_link.lower() or '.webp' in dl_link.lower():
+                        media_type = "Photo"
+                        
                     media_list.append({
                         'type': media_type,
                         'url': dl_link,
-                        'thumb': dl_link, # Backup Thumbnail
+                        'thumb': dl_link,
                         'title': "Threads Media"
                     })
                     return render_template('index.html', media_list=media_list, caption="Threads Media", active_tab=current_tab)
                 else:
-                    return render_template('index.html', error="Bhai, is post mein ya toh media hi nahi hai, ya ye account private hai jiski wajah se server block kar raha hai.", active_tab=current_tab)
+                    return render_template('index.html', error="Bhai, is video ko Threads ne kaafi zyada secure kar rakha hai, ya link private hai.", active_tab=current_tab)
 
             except Exception as th_err:
-                return render_template('index.html', error=f"Threads Dual-Engine Failed: {str(th_err)}", active_tab=current_tab)
+                return render_template('index.html', error=f"Threads Bot-Net Engine Failed: {str(th_err)}", active_tab=current_tab)
         # 🔥 ENGINE 2: INSTAGRAM
 
         # 🔥 ENGINE 2: INSTAGRAM
