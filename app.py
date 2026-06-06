@@ -529,45 +529,53 @@ def download():
                 return render_template('index.html', error=f"Twitter API Failed: {tw_err}", active_tab=current_tab)
 
       # 🔥 ENGINE 7: THREADS (NEW UNLIMITED API) 🔥
-     # 🔥 ENGINE 7: THREADS (UNLIMITED POWER - yt-dlp) 🔥
+    # 🔥 ENGINE 7: THREADS (DIRECT BS4 SCRAPER - PRO HACK) 🔥
         if 'threads.net' in url or 'threads.com' in url:
             try:
-                import yt_dlp
+                from bs4 import BeautifulSoup
                 
-                # yt-dlp ko chupchap chalane ki settings
-                ydl_opts = {
-                    'quiet': True,
-                    'no_warnings': True,
+                # Trick: Hum Threads server ko bolenge ki hum "WhatsApp" hain, 
+                # taaki wo bina JS load kiye seedha MP4 video aur image de de!
+                headers = {
+                    "User-Agent": "WhatsApp/2.21.12.21 A"
                 }
                 
-                with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-                    # Bina download kiye direct Threads server se link nikalna
-                    info = ydl.extract_info(url, download=False)
-                    
-                    dl_link = info.get('url')
-                    video_title = info.get('description') or info.get('title') or "Threads Media"
-                    thumb = info.get('thumbnail') or ""
+                # Safety ke liye threads.com ko threads.net mein badalna
+                clean_url = url.replace('threads.com', 'threads.net')
+                
+                response = requests.get(clean_url, headers=headers, timeout=15)
+                soup = BeautifulSoup(response.text, 'html.parser')
+                
+                dl_link = None
+                media_type = "Photo"
+                thumb = ""
+                
+                # Page ke andar chhupi hui 'meta' tags (jahan real link hote hain) nikalna
+                video_tag = soup.find("meta", property="og:video") or soup.find("meta", property="og:video:secure_url")
+                image_tag = soup.find("meta", property="og:image")
+                
+                if video_tag and video_tag.get("content"):
+                    dl_link = video_tag.get("content")
                     media_type = "Video"
+                elif image_tag and image_tag.get("content"):
+                    dl_link = image_tag.get("content")
                     
-                    # Agar link image ka hai
-                    if info.get('ext') in ['jpg', 'png', 'webp'] or info.get('vcodec') == 'none':
-                        media_type = "Photo"
-                        if not dl_link: # Agar direct link nahi mila toh thumbnail ko hi image maan lenge
-                            dl_link = thumb
-
-                    if dl_link:
-                        media_list.append({
-                            'type': media_type,
-                            'url': dl_link,
-                            'thumb': thumb if thumb else dl_link,
-                            'title': video_title[:30]
-                        })
-                        return render_template('index.html', media_list=media_list, caption=video_title, active_tab=current_tab)
-                    else:
-                        return render_template('index.html', error="Bhai, is Threads link mein media nahi mila.", active_tab=current_tab)
+                if image_tag and image_tag.get("content"):
+                    thumb = image_tag.get("content")
+                    
+                if dl_link:
+                    media_list.append({
+                        'type': media_type,
+                        'url': dl_link,
+                        'thumb': thumb if thumb else dl_link,
+                        'title': "Threads Media"
+                    })
+                    return render_template('index.html', media_list=media_list, caption="Threads Media", active_tab=current_tab)
+                else:
+                    return render_template('index.html', error="Bhai, is Threads link mein media chhipa hua hai ya page private hai.", active_tab=current_tab)
 
             except Exception as th_err:
-                return render_template('index.html', error=f"Threads Direct Engine Failed: {str(th_err)}", active_tab=current_tab)
+                return render_template('index.html', error=f"Threads Scraper Failed: {str(th_err)}", active_tab=current_tab)
         # 🔥 ENGINE 2: INSTAGRAM
 
         # 🔥 ENGINE 2: INSTAGRAM
