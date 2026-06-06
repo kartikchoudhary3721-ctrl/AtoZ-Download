@@ -529,12 +529,22 @@ def download():
                 return render_template('index.html', error=f"Twitter API Failed: {tw_err}", active_tab=current_tab)
 
       # 🔥 ENGINE 7: THREADS (NEW UNLIMITED API) 🔥
-   # 🔥 ENGINE 7: THREADS (COBALT - THE ULTIMATE FREE API) 🔥
+  # 🔥 ENGINE 7: THREADS (COBALT V10 - THE MULTI-SERVER PRO ENGINE) 🔥
         if 'threads.net' in url or 'threads.com' in url:
             try:
-                # Cobalt ekdum free, unlimited aur bina API key wala open-source tool hai.
-                # Ye sirf isliye chal raha hai kyunki humara server ab free hai!
-                api_url = "https://api.cobalt.tools/api/json"
+                import requests
+                
+                # Step 1: URL ko clean karna (.com ko .net banana aur query kachra hatana)
+                # Pichli baar ?xmt= wale kachre ne hi error diya tha!
+                clean_url = url.replace('threads.com', 'threads.net').split('?')[0]
+                
+                # Step 2: Naye Cobalt V10 ke Community Servers ka Array
+                # Agar ek fail hua toh doosra apne aap chalega!
+                cobalt_servers = [
+                    "https://api.cobalt.buss.lol/",
+                    "https://api.kwiatekm.dev/",
+                    "https://cobalt-api.peppe8o.com/"
+                ]
                 
                 headers = {
                     "Accept": "application/json",
@@ -543,27 +553,38 @@ def download():
                 }
                 
                 payload = {
-                    "url": url,
-                    "vQuality": "720" # HD quality ke liye
+                    "url": clean_url
                 }
                 
-                response = requests.post(api_url, json=payload, headers=headers, timeout=15)
-                data = response.json()
-                
+                data = None
+                # 🔥 THE LOOP: Ek ek karke sab servers par try karo
+                for server in cobalt_servers:
+                    try:
+                        response = requests.post(server, json=payload, headers=headers, timeout=10)
+                        if response.status_code == 200:
+                            data = response.json()
+                            # Agar error nahi hai toh loop se bahar aa jao
+                            if data.get("status") != "error":
+                                break 
+                    except:
+                        continue # Agar server down hai, toh agle par jao
+                        
                 dl_link = None
                 media_type = "Video"
                 
-                # Cobalt ka mast simple logic
+                # Step 3: Naye V10 Data Format se link nikalna
                 if data and isinstance(data, dict):
-                    if data.get('url'):
+                    # Normal post ke liye (status: 'stream' ya 'redirect')
+                    if data.get('status') in ['stream', 'redirect'] and data.get('url'):
                         dl_link = data.get('url')
-                    # Agar ek post mein multiple photo/video hain (Carousel)
-                    elif data.get('picker') and isinstance(data['picker'], list) and len(data['picker']) > 0:
-                        dl_link = data['picker'][0].get('url')
                         
+                    # Agar ek post mein multiple photo/video hain (status: 'picker')
+                    elif data.get('status') == 'picker' and data.get('picker') and len(data['picker']) > 0:
+                        dl_link = data['picker'][0].get('url')
+
                 if dl_link:
-                    # Check agar media photo hai
-                    if dl_link.endswith('.jpg') or dl_link.endswith('.png') or dl_link.endswith('.webp'):
+                    # Pata karna ki Photo hai ya Video
+                    if dl_link.endswith('.jpg') or dl_link.endswith('.png') or dl_link.endswith('.webp') or 'image' in dl_link.lower():
                         media_type = "Photo"
 
                     media_list.append({
@@ -574,11 +595,10 @@ def download():
                     })
                     return render_template('index.html', media_list=media_list, caption="Threads Media", active_tab=current_tab)
                 else:
-                    safe_data = str(data)[:500]
-                    return render_template('index.html', error=f"Bhai, Cobalt ne ye bheja: {safe_data}", active_tab=current_tab)
+                    return render_template('index.html', error=f"Bhai, is baar servers ne video chhipa li! Debug: {str(data)[:200]}", active_tab=current_tab)
 
             except Exception as th_err:
-                return render_template('index.html', error=f"Threads Ultimate Engine Failed: {str(th_err)}", active_tab=current_tab)
+                return render_template('index.html', error=f"Threads Multi-Server Engine Failed: {str(th_err)}", active_tab=current_tab)
         # 🔥 ENGINE 2: INSTAGRAM
 
         # 🔥 ENGINE 2: INSTAGRAM
