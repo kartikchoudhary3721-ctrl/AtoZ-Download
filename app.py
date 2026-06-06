@@ -529,76 +529,48 @@ def download():
                 return render_template('index.html', error=f"Twitter API Failed: {tw_err}", active_tab=current_tab)
 
       # 🔥 ENGINE 7: THREADS (NEW UNLIMITED API) 🔥
-  # 🔥 ENGINE 7: THREADS (COBALT V10 - THE MULTI-SERVER PRO ENGINE) 🔥
+ # 🔥 ENGINE 7: THREADS (YT-DLP CLEAN URL - THE BAAHUBALI RETURN) 🔥
         if 'threads.net' in url or 'threads.com' in url:
             try:
-                import requests
+                import yt_dlp
                 
-                # Step 1: URL ko clean karna (.com ko .net banana aur query kachra hatana)
-                # Pichli baar ?xmt= wale kachre ne hi error diya tha!
+                # 1. KACHRA SAAF KARNA (Master Stroke)
+                # URL se .com hata kar .net lagana aur '?' ke aage ka saara tracking kachra hatana
                 clean_url = url.replace('threads.com', 'threads.net').split('?')[0]
                 
-                # Step 2: Naye Cobalt V10 ke Community Servers ka Array
-                # Agar ek fail hua toh doosra apne aap chalega!
-                cobalt_servers = [
-                    "https://api.cobalt.buss.lol/",
-                    "https://api.kwiatekm.dev/",
-                    "https://cobalt-api.peppe8o.com/"
-                ]
-                
-                headers = {
-                    "Accept": "application/json",
-                    "Content-Type": "application/json",
-                    "User-Agent": "DigitalRiseMedia/1.0"
+                ydl_opts = {
+                    'quiet': True,
+                    'no_warnings': True,
                 }
                 
-                payload = {
-                    "url": clean_url
-                }
-                
-                data = None
-                # 🔥 THE LOOP: Ek ek karke sab servers par try karo
-                for server in cobalt_servers:
-                    try:
-                        response = requests.post(server, json=payload, headers=headers, timeout=10)
-                        if response.status_code == 200:
-                            data = response.json()
-                            # Agar error nahi hai toh loop se bahar aa jao
-                            if data.get("status") != "error":
-                                break 
-                    except:
-                        continue # Agar server down hai, toh agle par jao
-                        
-                dl_link = None
-                media_type = "Video"
-                
-                # Step 3: Naye V10 Data Format se link nikalna
-                if data and isinstance(data, dict):
-                    # Normal post ke liye (status: 'stream' ya 'redirect')
-                    if data.get('status') in ['stream', 'redirect'] and data.get('url'):
-                        dl_link = data.get('url')
-                        
-                    # Agar ek post mein multiple photo/video hain (status: 'picker')
-                    elif data.get('status') == 'picker' and data.get('picker') and len(data['picker']) > 0:
-                        dl_link = data['picker'][0].get('url')
-
-                if dl_link:
-                    # Pata karna ki Photo hai ya Video
-                    if dl_link.endswith('.jpg') or dl_link.endswith('.png') or dl_link.endswith('.webp') or 'image' in dl_link.lower():
+                with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                    # Yahan hum saaf kiya hua link (clean_url) bhej rahe hain
+                    info = ydl.extract_info(clean_url, download=False)
+                    
+                    dl_link = info.get('url')
+                    video_title = info.get('description') or info.get('title') or "Threads Media"
+                    thumb = info.get('thumbnail') or ""
+                    media_type = "Video"
+                    
+                    # Agar by-chance post mein video ki jagah sirf photo ho
+                    if info.get('ext') in ['jpg', 'png', 'webp'] or info.get('vcodec') == 'none':
                         media_type = "Photo"
+                        if not dl_link:
+                            dl_link = thumb
 
-                    media_list.append({
-                        'type': media_type,
-                        'url': dl_link,
-                        'thumb': dl_link,
-                        'title': "Threads Media"
-                    })
-                    return render_template('index.html', media_list=media_list, caption="Threads Media", active_tab=current_tab)
-                else:
-                    return render_template('index.html', error=f"Bhai, is baar servers ne video chhipa li! Debug: {str(data)[:200]}", active_tab=current_tab)
+                    if dl_link:
+                        media_list.append({
+                            'type': media_type,
+                            'url': dl_link,
+                            'thumb': thumb if thumb else dl_link,
+                            'title': video_title[:30]
+                        })
+                        return render_template('index.html', media_list=media_list, caption=video_title, active_tab=current_tab)
+                    else:
+                        return render_template('index.html', error="Bhai, is Threads link mein media nahi mila.", active_tab=current_tab)
 
             except Exception as th_err:
-                return render_template('index.html', error=f"Threads Multi-Server Engine Failed: {str(th_err)}", active_tab=current_tab)
+                return render_template('index.html', error=f"Threads yt-dlp Failed: {str(th_err)}", active_tab=current_tab)
         # 🔥 ENGINE 2: INSTAGRAM
 
         # 🔥 ENGINE 2: INSTAGRAM
